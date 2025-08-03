@@ -714,6 +714,7 @@ const anzhiyu = {
     consoleEl.classList.add("reward-show");
     anzhiyu.initConsoleState();
   },
+  
   // 显示中控台
   showConsole: function () {
     consoleEl.classList.add("show");
