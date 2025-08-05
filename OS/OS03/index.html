@@ -1,0 +1,1341 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>第三章 操作系统 处理机调度与死锁 | LGX</title><meta name="keywords" content="操作系统, 调度算法, 死锁"><meta name="author" content="LGX"><meta name="copyright" content="LGX"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#18171d"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="第三章 操作系统 处理机调度与死锁"><meta name="application-name" content="第三章 操作系统 处理机调度与死锁"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#18171d"><meta property="og:type" content="article"><meta property="og:title" content="第三章 操作系统 处理机调度与死锁"><meta property="og:url" content="https://liuguoxings.github.io/OS/OS03/index.html"><meta property="og:site_name" content="LGX"><meta property="og:description" content="第三章 处理机调度与死锁   【目的要求】  [掌握]进程调度和常见的调度算法； [熟悉]死锁的概念和产生的必要条件； [掌握]死锁的预防和避免方法； [了解]死锁的检测及恢复。    【重点与难点】  常见的进程调度算法 死锁的原因和必要条件 银行家算法     3.1 处理机调度的层次和调度算法"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/Nightliuguoxing/Pic@main/pics/avatar.jpg"><meta property="article:author" content="LGX"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Nightliuguoxing/Pic@main/pics/avatar.jpg"><meta name="description" content="第三章 处理机调度与死锁   【目的要求】  [掌握]进程调度和常见的调度算法； [熟悉]死锁的概念和产生的必要条件； [掌握]死锁的预防和避免方法； [了解]死锁的检测及恢复。    【重点与难点】  常见的进程调度算法 死锁的原因和必要条件 银行家算法     3.1 处理机调度的层次和调度算法"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://liuguoxings.github.io/OS/OS03/"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2024/07/27/125766904/ba62475f396df9de3316a08ed9e65d86_5680958632268053399..png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🏠 智能家居小能手","🔨 设计开发一条龙","🤝 专修交互与设计","🏃 脚踏实地行动派","🧱 团队小组发动机","💢 壮汉人狠话不多"]},
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: LGX","link":"链接: ","source":"来源: LGX","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'LGX',
+  title: '第三章 操作系统 处理机调度与死锁',
+  postAI: '',
+  pageFillDescription: '第三章 处理机调度与死锁, 3.1 处理机调度的层次和调度算法的目标, 3.1.1 处理机调度的层次, 3.1.2 处理机调度算法的目标, 3.2 作业与作业调度, 3.2.1 批处理系统中的作业, 3.2.2 作业调度的主要任务, 3.2.3 先来先服务(FCFS)和短作业优先(SJF）调度算法, 3.2.4 优先级调度算法和高响应比优先调度算法, 3.3 进程调度, 3.3.1 进程调度的任务、机制和方式, 3.3.2 轮转（RR）调度算法, 3.3.3 优先级调度算法, 3.3.4 多队列调度算法, 3.3.5 多级反馈队列调度算法, 3.3.6  基于公平原则的调度算法, 3.4 实时调度, 3.4.1 实现实时调度的基本条件, 3.4.2 实时调度算法的分类, 3.4.3 最早截止时间优先即EDF(Earliest Deadline First)算法, 3.4.4 最低松弛度优先LLF(Least Laxity First)算法, 3.4.5 优先级倒置(priority inversion problem), 3.5 死锁概述, 3.5.1  资源问题, 3.5.2 计算机系统中的死锁, 3.5.3 死锁的定义、必要条件和处理方法, 3.6 预防死锁, 3.6.1 破坏请求和保持条件, 3.6.2 破坏不可抢占条件, 3.6.3 破坏循环等待条件, 3.7 避免死锁, 3.7.1 系统安全状态, 安全状态之例, 3.7.2 利用银行家算法避免死锁, 银行家算法之例, 3.8 死锁的检测与解除, 3.8.1 死锁的检测, 3.8.2 死锁的解除, 强化一 作业调度算法, 强化二 银行家算法第三章处理机调度与死锁目的要求掌握进程调度和常见的调度算法熟悉死锁的概念和产生的必要条件掌握死锁的预防和避免方法了解死锁的检测及恢复重点与难点常见的进程调度算法死锁的原因和必要条件银行家算法处理机调度的层次和调度算法的目标处理机调度的层次高级调度低级调度中级调度处理机调度算法的目标处理机调度算法的共同目标资源利用率的利用率有效工作时间有效工作时间空闲等待时间公平性应使诸进程都获得合理的时间平衡性兼顾计算型作业和型作业策略强制执行批处理系统的目标平均周转时间短可把平均周转时间描述为作业的周转时间与系统为它提供服务的时间之比即称为带权周转时间平均带权周转时间则可表示为系统吞吐量高吞吐量是指在单位时间内系统所完成的作业数为了获得高的系统吞吐量就应该尽量多地选择短作业运行处理机利用率高如果单纯是为了使处理机利用率高应尽量多地选择计算量大的作业运行分时系统的目标响应时间快从键盘输入的请求信息传送到处理机的时间处理机对请求信息进行处理的时间将所形成的响应信息回送到终端显示器的时间均衡性实时系统的目标截止时间的保证可预测性作业与作业调度批处理系统中的作业作业和作业步作业包含程序数据和作业说明书作业步作业中每一个相对独立又相互关联的顺序加工步骤例如编译链接运行作业控制块作业运行的三个阶段和三种状态三个阶段收容运行和完成三种状态后备运行和完成作业调度的主要任务先来先服务和短作业优先调度算法先来先服务调度算法周转时间完成时间到达时间说明采用该算法时系统按照作业到达的先后次序来进行调度该算法既可以用于作业调度也可以用于进程调度一般与其它算法结合使用优缺点对长作业有利对短作业不利短作业优先调度算法必须预知作业的运行时间不一定能真正做到短作业优先调度该算法对长作业不利在采用算法时人机无法实现交互该算法完全未考虑作业的紧迫程度因而不能保证紧迫性作业进程会被及时处理优先级调度算法和高响应比优先调度算法优先级调度算法高响应比优先调度算法优先权等待时间服务时间服务时间响应时间服务时间优点实现了算法和算法的折中缺点由于采用了动态优先级每次调度前都要先计算相应比增加了系统开销进程调度进程调度的任务机制和方式进程调度的任务保存处理机的现场信息按某种算法选取进程把处理机分配给进程进程调度机制排队器将变为就绪状态的进程插入相应的就绪队列分派器分派程序将进程调度程序选定的进程从就绪队列中移出然后进行从分派器到新选进程的上下文切换将处理机分给新选进程上下文切换器每次调度发生两对上下文切换进程调度方式非抢占方式抢占方式优先权原则短进程优先原则时间片原则轮转调度算法时间片轮转法的基本原理进程切换时机若一个时间片尚未用完正在运行的进程便已完成就立即激活调度程序再调度就绪队列中队首的进程运行并启动一个新的时间片在一个时间片用完时计时器中断处理程序被激活如果进程尚未运行完毕调度程序将把它送往就绪队列的末尾时间片大小的确定优先级调度算法优先级调度算法的类型非抢占式优先权算法这种调度算法主要用于批处理系统中也可用于某些对实时性要求不严的实时系统中抢占式优先权调度算法优先级的类型静态优先级静态优先权是在创建进程时确定的且在进程的整个运行期间保持不变确定进程优先权的依据有如下三个方面进程类型进程对资源的需求用户要求动态优先级动态优先权是指在创建进程时所赋予的优先权是可以随进程的推进或随其等待时间的增加而改变的以便获得更好的调度性能多队列调度算法多级反馈队列调度算法调度机制多级反馈队列调度算法的性能终端型作业用户短批处理作业用户长批处理作业用户基于公平原则的调度算法保证调度算法公平分享调度算法思考与练习假设一个系统中有个进程它们的到达时间和服务时间如下表所示进程到达时间服务时间忽略以及其它开销时间若分别按先来先服务非抢占及抢占的短进程优先高响应比优先时间片轮转时间片多级反馈队列第级队列的时间片调度算法进行调度请给出各进程的完成时间周转时间带权周转时间平均周转时间和平均带权周转时间实时调度实现实时调度的基本条件提供必要的信息就绪时间开始截止时间和完成截止时间处理时间资源要求优先级系统处理能力强采用抢占式调度机制具有快速切换机制对外部中断的快速响应能力快速的任务分派能力实时调度算法的分类非抢占式调度算法非抢占式轮转调度算法非抢占式优先调度算法抢占式调度算法基于时钟中断的抢占式优先权调度算法立即抢占的优先权调度算法最早截止时间优先即算法非抢占式调度方式用于非周期性实时任务抢占式调度方式用于周期性实时任务例在一个实时系统中有两个周期性实时任务和任务要求每执行一次执行时间为任务只要求每执行一次执行时间为最低松弛度优先算法优先级倒置优先级倒置的形成优先级倒置的解决方法有个周期性任务任务要求每执行一次执行时间为任务要求每执行一次执行时间为任务要求每执行一次执行时间为应如何按最低松弛度优先算法对它们进行调度死锁概述资源问题可重用资源和消耗性资源可重用性资源是一种可供用户重复使用多次的资源每一个可重用性资源中的单元只能分配给一个进程使用不允许多个进程共享进程在使用可重用性资源时须按照这样的顺序请求资源如果请求资源失败请求进程将会被阻塞或循环等待使用资源进程对资源进行操作如用打印机进行打印释放资源当进程使用完后自己释放资源系统中每一类可重用性资源中的单元数目是相对固定的进程在运行期间既不能创建也不能删除它临时性资源可消耗性资源是指由一个进程产生被另一个进程使用一短暂时间后便无用的资源故也称之为消耗性资源如进程通信中的消息它也可能引起死锁每一类可消耗性资源的单元数目在进程运行期间是可以不断变化的有时它可以有许多有时可能为进程在运行过程中可以不断地创造可消耗性资源的单元将它们放入该资源类的缓冲区中以增加该资源类的单元数目进程在运行过程中可以请求若干个可消耗性资源单元用于进程自己的消耗不再将它们返回给该资源类中可抢占性资源和不可抢占性资源可剥夺和非剥夺性资源可抢占性资源是指某进程在获得这类资源后该资源可以再被其他进程或系统剥夺如内存对这类资源的使用不会引起死锁不可抢占性资源当系统把这类资源分配给某进程后再不能强行收回只能在进程用完后自行释放如刻录机磁带机打印机等计算机系统中的死锁竞争不可抢占性资源引起死锁竞争可消耗性资源引起死锁进程推进顺序不当引起死锁进程推进顺序合法进程推进顺序非法死锁的定义必要条件和处理方法死锁的定义死锁的定义是指多个进程在运行过程中因竞争资源而造成的一种僵局当进程处于这种僵持状态时若无外力作用它们都将无法再向前推进死锁的定义如果一组进程中的每一个进程都在等待仅由该组进程中的其它进程才能引发的事件那么该组进程是死锁的产生死锁的必要条件互斥条件进程访问的是临界资源即在一段时间内某资源仅为一个进程占有请求和保持条件当一个进程因请求资源而被阻塞时对已经获得的资源保持不放不可抢占条件进程已经获得的资源在未使用完之前不能被其它进程剥夺只能自己在使用完时由自己释放循环等待条件在发生死锁时必然存在一个进程资源的环形链即若干进程之间形成一种头尾相连的循环等待资源的关系处理死锁的方法预防死锁通过设置某些限制条件去破坏产生死锁的四个必要条件中的一个或几个条件来预防发生死锁避免死锁不事先采取各种限制措施去破坏产生死锁的四个必要条件而是在资源的动态分配过程中用某种方法去防止系统进入不安全状态从而避免发生死锁检测死锁不事先采取任何限制性措施也不必检查系统是否已经进入不安全区而是允许系统在运行过程中发生死锁但可通过系统设置的检查机构及时地检测出死锁的发生并精确地确定与死锁有关的进程和资源然后采取适当措施从系统中将已发生的死锁清除掉解除死锁这是与检测死锁相配套的一种措施常用的实施方法是撤销或挂起一些进程以便回收一些资源再将这些资源分配给已处于阻塞状态的进程使之转为就绪状态以继续运行例考虑个进程共享的具有个同类资源的系统证明如果对于有而且所有的最大需求量之和小于那么该系统是死锁无关的例设系统中仅有一类独占资源进程一次只能申请一个资源系统中多个进程竞争该类资源试判断下述哪些情况会发生死锁为什么资源数为进程数为每个进程最多需要个资源资源数为进程数为每个进程最多需要个资源资源数为进程数为每个进程最多需要个资源资源数为进程数为每个进程最多需要个资源预防死锁破坏请求和保持条件第一种协议一次性申请缺点资源被严重浪费使进程延迟运行第二种协议方法它允许一个进程只获得运行初期所需的资源后便开始运行进程运行过程中再逐步释放已分配给自己的且已用毕的全部资源然后再请求新的所需资源优点能使进程更快地完成任务提高设备的利用率还可减少进程发生饥饿的机率破坏不可抢占条件方法逐个申请提出新的资源请求得不到满足时必须释放已保持的所有资源以后需要时再重新申请缺点实现起来比较复杂且要付出很大的代价还可能因为反复地申请和释放资源致使进程的执行被无限地推迟破坏循环等待条件方法系统将所有资源按类型进行线性排队并赋予不同的序号所有进程对资源的请求必须严格按照资源序号递增的次序提出缺点因为系统中各类资源的序号必须相对稳定所以限制了新类型设备的增加作业使用各类资源的顺序可能与系统规定的顺序不同因而造成对资源的浪费按规定次序申请的方法限制了用户简单自主地编程避免死锁系统安全状态安全状态安全状态之例假定系统中有三个进程和共有台磁带机进程总共要求台磁带机和分别要求台和台假设在时刻进程和已分别获得台台和台磁带机尚有台空闲未分配进程最大需求已分配可用由安全状态向不安全状态的转换利用银行家算法避免死锁银行家算法中的数据结构可利用资源向量最大需求矩阵分配矩阵需求矩阵银行家算法设是进程的请求向量如果表示进程需要个类型的资源当发出资源请求后系统按下述步骤进行检查如果便转向步骤否则认为出错因为它所需要的资源数已超过它所宣布的最大值如果便转向步骤否则表示尚无足够资源须等待系统试探着把资源分配给进程并修改下面数据结构中的数值系统执行安全性算法检查此次资源分配后系统是否处于安全状态若安全才正式将资源分配给进程以完成本次分配否则将本次的试探分配作废恢复原来的资源分配状态让进程等待安全性算法设置两个向量工作向量它表示系统可提供给进程继续运行所需的各类资源数目它含有个元素在执行安全性算法开始时它表示系统是否有足够的资源分配给进程使之运行完成开始时先做当有足够资源分配给进程时再令从进程集合中找到一个能满足下述条件的进程若找到执行步骤否则执行步骤当进程获得资源后可顺利执行直至完成并释放出分配给它的资源故应执行如果所有进程的都满足则表示系统处于安全状态否则系统处于不安全状态银行家算法之例假定系统中有五个进程和三类资源各种资源的数量分别为在时刻的资源分配情况如图所示死锁的检测与解除死锁的检测当系统为进程分配资源时若未采取任何限制性措施则系统必须提供检测和解除死锁的手段为此系统必须做到保存有关资源的请求和分配信息提供一种算法利用这些信息来检测系统是否已进入死锁状态资源分配图死锁定理死锁检测中的数据结构工作向量它表示系统可提供给进程继续运行所需的各类资源数目初始时把不占用资源的进程向量并且记入表中即从进程集合中找到一个的进程做如下处理将其资源分配图简化释放出资源增加工作向量将它记入表中若不能把所有进程都记入表中便表明系统状态的资源分配图是不可完全简化的因此该系统状态将发生死锁死锁的解除当发现有死锁时便立即把它们从死锁状态中解脱出来常采用解除死锁的方法是抢占资源从一个或多个进程中抢占足够数量的资源分配给死锁进程以解除死锁状态终止或撤消进程全部终止或撤销或按某种顺序终止或撤销死锁进程打破循环环路使系统从死锁状态解脱出来终止进程的方法逐个终止进程时选择被终止进程时应考虑的因素有进程的优先级大小进程已执行了多少时间还需要多少时间方能完成进程在运行中已经使用资源的多少以后还需要多少资源进程的性质是交互式的还是批处理式的付出代价最小的死锁解除算法解除死锁时可使撤销的进程数目最少也可以选择撤销进程所付出的代价最小为把系统从死锁状态中解脱出来所花费的代价可表示为练习某系统时刻的资源分配情况如下所示试问该状态是否安全若进程提出请求系统能否将资源分配给它强化一作业调度算法例先来先服务调度算法说明采用该算法时系统按照作业到达的先后次序来进行调度该算法既可以用于作业调度也可以用于进程调度一般与其它算法结合使用优缺点对长作业有利对短作业不利例短作业进程优先调度算法周转时间完成时间到达时间带权周转时间周转时间服务时间例单道批处理系统中有个进程其有关情况如下表所示采用响应比高者优先调度算法时计算其平均周转时间和平均带权周转时间请写出计算过程进程名提交时间运行时间例有一个具有两道作业的批处理系统作业调度采用短作业优先的调度算法进程调度采用以优先数为基础的抢占式调度算法在下表所示的作业序列作业优先数即为进程优先数优先数越小优先级越高作业号到达时间估计运行时间分钟优先数要求列出所有作业进入内存时间及结束时间计算平均周转时间以分钟计算例在一个单道批处理系统中一组作业的提交时刻和运行时间如下表所示作业名提交时间运行时间试计算下列三种作业调度算法的平均周转时间和带权周转时间先来先服务短作业优先响应比高者优先例我们如果为一个作业只建立一个进程则为了照顾短作业用户应采用为照顾紧急作业用户应采用为能实现人机交互作用应采用为了兼顾短作业和长时间等待的作业应采用为了使短作业长作业及交互作业用户都比较满意应采用为了使作业的平均周转时间短应采用算法调度算法短作业优先时间片轮转法多级反馈队列调度算法基于优先权的剥夺调度算法高响应比优先答短作业优先基于优先权的剥夺调度算法时间片轮转法高响应比优先多级反馈队列调度算法短作业优先强化二银行家算法例考虑个进程共享的具有个同类资源的系统证明如果对于有而且所有的最大需求量之和小于那么该系统是死锁无关的例设系统中仅有一类独占资源进程一次只能申请一个资源系统中多个进程竞争该类资源试判断下述哪些情况会发生死锁为什么资源数为进程数为每个进程最多需要个资源资源数为进程数为每个进程最多需要个资源资源数为进程数为每个进程最多需要个资源资源数为进程数为每个进程最多需要个资源例某系统有共三种资源在时刻和这个进程对资源的占有和需求情况见下表此刻系统可用资源向量为将系统资源总数和此刻各进程对资源的需求数目用向量矩阵表示出来如果此时和均发出资源请求向量为了保持系统安全性应该如何分配资源给这两个进程进程名最大资源需求量已分配的资源数量例在银行家算法中系统的资源数量为经过一段时间的分配后资源分配与占用情况见下表资源进程已分配资源最大资源还需求资源可用资源量请分析该状态是否是安全的若进程提出请求后系统能否将资源分配给它例某系统中有个进程和类资源在时刻的资源分配情况如下表资源进程已分配资源还需求资源可用资源量该时刻系统是否安全请分析如果进程提出请求系统能否将资源分配给它',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-08-05 18:05:55',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://cdn.jsdelivr.net/gh/Nightliuguoxing/Pic@main/pics/avatar.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">LGX</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a><div id="he-plugin-simple"></div><script>var WIDGET = {
+  "CONFIG": {
+    "modules": "0124",
+    "background": "2",
+    "tmpColor": "FFFFFF",
+    "tmpSize": "16",
+    "cityColor": "FFFFFF",
+    "citySize": "16",
+    "aqiColor": "E8D87B",
+    "aqiSize": "16",
+    "weatherIconSize": "24",
+    "alertIconSize": "18",
+    "padding": "10px 10px 10px 10px",
+    "shadow": "0",
+    "language": "auto",
+    "borderRadius": "20",
+    "fixed": "true",
+    "vertical": "top",
+    "horizontal": "left",
+    "left": "20",
+    "top": "7.1",
+    "key": "df245676fb434a0691ead1c63341cd94"
+  }
+}
+</script><link rel="stylesheet" href="https://widget.qweather.net/simple/static/css/he-simple.css?v=1.4.0"/><script src="https://widget.qweather.net/simple/static/js/he-simple.js?v=1.4.0"></script></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AOP/" style="font-size: 1.05rem;">AOP<sup>1</sup></a><a href="/tags/Go%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/" style="font-size: 1.05rem;">Go基础教程<sup>5</sup></a><a href="/tags/Machine-Learning/" style="font-size: 1.05rem;">Machine Learning<sup>63</sup></a><a href="/tags/Matlab/" style="font-size: 1.05rem;">Matlab<sup>5</sup></a><a href="/tags/MongoDB/" style="font-size: 1.05rem;">MongoDB<sup>1</sup></a><a href="/tags/Python%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/" style="font-size: 1.05rem;">Python基础教程<sup>4</sup></a><a href="/tags/Redis/" style="font-size: 1.05rem;">Redis<sup>1</sup></a><a href="/tags/SpringCache/" style="font-size: 1.05rem;">SpringCache<sup>1</sup></a><a href="/tags/YOLO/" style="font-size: 1.05rem;">YOLO<sup>1</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">操作系统<sup>7</sup></a><a href="/tags/%E6%97%A5%E5%BF%97%E5%88%87%E9%9D%A2/" style="font-size: 1.05rem;">日志切面<sup>1</sup></a><a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 1.05rem;">深度学习<sup>1</sup></a><a href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/" style="font-size: 1.05rem;">目标检测<sup>1</sup></a><a href="/tags/%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/" style="font-size: 1.05rem;">系列教程<sup>5</sup></a><a href="/tags/%E7%BC%93%E5%AD%98%E6%B3%A8%E8%A7%A3/" style="font-size: 1.05rem;">缓存注解<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/08/"><span class="card-archive-list-date">八月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/07/"><span class="card-archive-list-date">七月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">81</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/05/"><span class="card-archive-list-date">五月 2021</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/04/"><span class="card-archive-list-date">四月 2021</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url">操作系统</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>操作系统</span></a></span></div></div><h1 class="post-title" itemprop="name headline">第三章 操作系统 处理机调度与死锁</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2021-05-11T16:00:00.000Z" title="发表于 2021-05-12 00:00:00">2021-05-12</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2025-08-05T10:05:55.759Z" title="更新于 2025-08-05 18:05:55">2025-08-05</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为山东-济南"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>山东-济南</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src=""></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://liuguoxings.github.io/OS/OS03/"><header><a class="post-meta-categories" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url">操作系统</a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" tabindex="-1" itemprop="url">操作系统</a><h1 id="CrawlerTitle" itemprop="name headline">第三章 操作系统 处理机调度与死锁</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">LGX</span><time itemprop="dateCreated datePublished" datetime="2021-05-11T16:00:00.000Z" title="发表于 2021-05-12 00:00:00">2021-05-12</time><time itemprop="dateCreated datePublished" datetime="2025-08-05T10:05:55.759Z" title="更新于 2025-08-05 18:05:55">2025-08-05</time></header><h2 id="第三章-处理机调度与死锁">第三章 处理机调度与死锁</h2>
+<ul>
+<li>
+<p>【目的要求】</p>
+<ol>
+<li>[掌握]进程调度和常见的调度算法；</li>
+<li>[熟悉]死锁的概念和产生的必要条件；</li>
+<li>[掌握]死锁的预防和避免方法；</li>
+<li>[了解]死锁的检测及恢复。</li>
+</ol>
+</li>
+<li>
+<p>【重点与难点】</p>
+<ul>
+<li>常见的进程调度算法</li>
+<li>死锁的原因和必要条件</li>
+<li>银行家算法</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="3-1-处理机调度的层次和调度算法的目标">3.1 处理机调度的层次和调度算法的目标</h2>
+<h4 id="3-1-1-处理机调度的层次">3.1.1 处理机调度的层次</h4>
+<ol>
+<li>高级调度</li>
+<li>低级调度</li>
+<li>中级调度(Intermediate-Level Scheduling)</li>
+</ol>
+<h4 id="3-1-2-处理机调度算法的目标">3.1.2 处理机调度算法的目标</h4>
+<ol>
+<li>处理机调度算法的共同目标
+<ul>
+<li>资源利用率:  CPU的利用率 = $ \frac{CPU有效工作时间}{CPU有效工作时间+CPU空闲等待时间} $</li>
+<li>公平性：应使诸进程都获得合理的CPU时间。</li>
+<li>平衡性：兼顾计算型作业和I/O型作业。</li>
+<li>策略强制执行</li>
+</ul>
+</li>
+<li>批处理系统的目标
+<ul>
+<li>平均周转时间短
+<ul>
+<li>可把平均周转时间描述为： $ T = \frac{1}{n}  [\displaystyle \sum^i_{i=1}T_i] $</li>
+<li>作业的周转时间T与系统为它提供服务的时间TS之比，即$ W = \frac{T}{TS} $，称为带权周转时间</li>
+<li>平均带权周转时间则可表示为: $ T = \frac{1}{n}  [\displaystyle \sum^n_{i=1}\frac{T_i}{T_{si}}] $</li>
+</ul>
+</li>
+<li>系统吞吐量高
+<ul>
+<li>吞吐量是指在单位时间内系统所完成的作业数。为了获得高的系统吞吐量，就应该尽量多地选择短作业运行。</li>
+</ul>
+</li>
+<li>处理机利用率高
+<ul>
+<li>如果单纯是为了使处理机利用率高，应尽量多地选择计算量大的作业运行。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>分时系统的目标
+<ul>
+<li>响应时间快
+<ul>
+<li>从键盘输入的请求信息传送到处理机的时间；</li>
+<li>处理机对请求信息进行处理的时间；</li>
+<li>将所形成的响应信息回送到终端显示器的时间。</li>
+</ul>
+</li>
+<li>均衡性</li>
+</ul>
+</li>
+<li>实时系统的目标
+<ul>
+<li>截止时间的保证</li>
+<li>可预测性</li>
+</ul>
+</li>
+</ol>
+<h2 id="3-2-作业与作业调度">3.2 作业与作业调度</h2>
+<h4 id="3-2-1-批处理系统中的作业">3.2.1 批处理系统中的作业</h4>
+<ol>
+<li>作业和作业步
+<ul>
+<li>作业：包含程序、数据和作业说明书</li>
+<li>作业步：作业中每一个相对独立，又相互关联的顺序加工步骤。例如：编译→链接→运行</li>
+</ul>
+</li>
+<li>作业控制块JCB(Job Control Block）</li>
+<li>作业运行的三个阶段和三种状态
+<ul>
+<li>三个阶段：收容、运行和完成</li>
+<li>三种状态：后备、运行和完成</li>
+</ul>
+</li>
+</ol>
+<h4 id="3-2-2-作业调度的主要任务">3.2.2 作业调度的主要任务</h4>
+<h4 id="3-2-3-先来先服务-FCFS-和短作业优先-SJF）调度算法">3.2.3 先来先服务(FCFS)和短作业优先(SJF）调度算法</h4>
+<ol>
+<li>先来先服务调度算法 FCFS
+<ul>
+<li>周转时间 = 完成时间 - 到达时间</li>
+<li>说明：采用该算法时，系统按照作业到达的先后次序来进行调度。该算法既可以用于作业调度，也可以用于进程调度。一般与其它算法结合使用。</li>
+<li>优缺点：对长作业有利，对短作业不利。</li>
+<li><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Nightliuguoxing/Pic@main/image/os/1619513214051-OS3231.jpg" alt="FCFS"></li>
+</ul>
+</li>
+<li>短作业优先调度算法 SJF
+<ul>
+<li><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Nightliuguoxing/Pic@main/image/os/1619513217519-OS3232.jpg" alt="FCFS vs SJF"></li>
+<li>必须预知作业的运行时间,不一定能真正做到短作业优先调度</li>
+<li>该算法对长作业不利</li>
+<li>在采用SJF算法时，人机无法实现交互</li>
+<li>该算法完全未考虑作业的紧迫程度，因而不能保证紧迫性作业(进程)会被及时处理</li>
+</ul>
+</li>
+</ol>
+<h4 id="3-2-4-优先级调度算法和高响应比优先调度算法">3.2.4 优先级调度算法和高响应比优先调度算法</h4>
+<ol>
+<li>优先级调度算法</li>
+<li>高响应比优先调度算法 HRRN
+<ul>
+<li>优先权 = $ \frac{等待时间+服务时间}{服务时间} $ = $ \frac{响应时间}{服务时间} $</li>
+<li>优点: 实现了FCFS算法和SJF算法的折中</li>
+<li>缺点: 由于采用了动态优先级，每次调度前都要先计算相应比，增加了系统开销</li>
+</ul>
+</li>
+</ol>
+<h2 id="3-3-进程调度">3.3 进程调度</h2>
+<h4 id="3-3-1-进程调度的任务、机制和方式">3.3.1 进程调度的任务、机制和方式</h4>
+<ol>
+<li>进程调度的任务
+<ul>
+<li>保存处理机的现场信息</li>
+<li>按某种算法选取进程</li>
+<li>把处理机分配给进程</li>
+</ul>
+</li>
+<li>进程调度机制
+<ul>
+<li>排队器：将变为就绪状态的进程插入相应的就绪队列。</li>
+<li>分派器（分派程序）：将进程调度程序选定的进程从就绪队列中移出，然后进行从分派器到新选进程的上下文切换，将处理机分给新选进程。</li>
+<li>上下文切换器：每次调度发生两对上下文切换。</li>
+</ul>
+</li>
+<li>进程调度方式
+<ul>
+<li>非抢占方式(Non-preemptive Mode)</li>
+<li>抢占方式(Preemptive Mode)
+<ul>
+<li>优先权原则。</li>
+<li>短进程优先原则。</li>
+<li>时间片原则。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="3-3-2-轮转（RR）调度算法">3.3.2 轮转（RR）调度算法</h4>
+<ol>
+<li>时间片轮转法的基本原理</li>
+<li>进程切换时机
+<ul>
+<li>若一个时间片尚未用完，正在运行的进程便已完成，就立即激活调度程序，再调度就绪队列中队首的进程运行，并启动一个新的时间片。</li>
+<li>在一个时间片用完时，计时器中断处理程序被激活。如果进程尚未运行完毕，调度程序将把它送往就绪队列的末尾。</li>
+</ul>
+</li>
+<li>时间片大小的确定</li>
+</ol>
+<h4 id="3-3-3-优先级调度算法">3.3.3 优先级调度算法</h4>
+<ol>
+<li>
+<p>优先级调度算法的类型</p>
+<ul>
+<li>非抢占式优先权算法
+<ul>
+<li>这种调度算法主要用于批处理系统中</li>
+<li>也可用于某些对实时性要求不严的实时系统中</li>
+</ul>
+</li>
+<li>抢占式优先权调度算法</li>
+</ul>
+</li>
+<li>
+<p>优先级的类型</p>
+<ul>
+<li>静态优先级: 静态优先权是在创建进程时确定的，且在进程的整个运行期间保持不变。
+<ul>
+<li>确定进程优先权的依据有如下三个方面：
+<ul>
+<li>进程类型。</li>
+<li>进程对资源的需求。</li>
+<li>用户要求。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>动态优先级: 动态优先权是指，在创建进程时所赋予的优先权，是可以随进程的推进或随其等待时间的增加而改变的，以便获得更好的调度性能</li>
+</ul>
+</li>
+</ol>
+<h4 id="3-3-4-多队列调度算法">3.3.4 多队列调度算法</h4>
+<h4 id="3-3-5-多级反馈队列调度算法">3.3.5 多级反馈队列调度算法</h4>
+<ol>
+<li>调度机制
+<ul>
+<li><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Nightliuguoxing/Pic@main/image/os/1619513496361-OS3352.jpg" alt="多级反馈队列调度算法"></li>
+</ul>
+</li>
+<li>多级反馈队列调度算法的性能
+<ul>
+<li>终端型作业用户。</li>
+<li>短批处理作业用户。</li>
+<li>长批处理作业用户。</li>
+</ul>
+</li>
+</ol>
+<h4 id="3-3-6-基于公平原则的调度算法">3.3.6  基于公平原则的调度算法</h4>
+<ol>
+<li>保证调度算法</li>
+<li>公平分享调度算法</li>
+</ol>
+<hr>
+<p>思考与练习：假设一个系统中有5个进程，它们的到达时间和服务时间如下表所示</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">进程</th>
+<th style="text-align:center">到达时间</th>
+<th style="text-align:center">服务时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">A</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">3</td>
+</tr>
+<tr>
+<td style="text-align:center">B</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">6</td>
+</tr>
+<tr>
+<td style="text-align:center">C</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">4</td>
+</tr>
+<tr>
+<td style="text-align:center">D</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">5</td>
+</tr>
+<tr>
+<td style="text-align:center">E</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">忽略I/O以及其它开销时间，若分别按</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>先来先服务（FCFS）</li>
+<li>非抢占及抢占的短进程优先（SPF）</li>
+<li>高响应比优先（HRRN）</li>
+<li>时间片轮转（RR，时间片=1）</li>
+<li>多级反馈队列（FB，第i级队列的时间片=2i-1）调度算法进行CPU调度。<br>
+请给出各进程的<code>完成时间</code>、<code>周转时间</code>、<code>带权周转时间</code>、<code>平均周转时间</code>和<code>平均带权周转时间</code>。</li>
+</ul>
+<hr>
+<h2 id="3-4-实时调度">3.4 实时调度</h2>
+<h4 id="3-4-1-实现实时调度的基本条件">3.4.1 实现实时调度的基本条件</h4>
+<ol>
+<li>提供必要的信息
+<ul>
+<li>就绪时间</li>
+<li>开始截止时间和完成截止时间</li>
+<li>处理时间</li>
+<li>资源要求</li>
+<li>优先级</li>
+</ul>
+</li>
+<li>系统处理能力强</li>
+<li>采用抢占式调度机制</li>
+<li>具有快速切换机制
+<ul>
+<li>对外部中断的快速响应能力</li>
+<li>快速的任务分派能力</li>
+</ul>
+</li>
+</ol>
+<h4 id="3-4-2-实时调度算法的分类">3.4.2 实时调度算法的分类</h4>
+<ol>
+<li>非抢占式调度算法
+<ul>
+<li>非抢占式轮转调度算法</li>
+<li>非抢占式优先调度算法</li>
+</ul>
+</li>
+<li>抢占式调度算法
+<ul>
+<li>基于时钟中断的抢占式优先权调度算法</li>
+<li>立即抢占(Immediate Preemption)的优先权调度算法</li>
+</ul>
+</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Nightliuguoxing/Pic@main/image/os/1619513426393-OS3422.jpg" alt="实时进程调度"></p>
+<h4 id="3-4-3-最早截止时间优先即EDF-Earliest-Deadline-First-算法">3.4.3 最早截止时间优先即EDF(Earliest Deadline First)算法</h4>
+<ol>
+<li>非抢占式调度方式用于非周期性实时任务
+<ul>
+<li><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Nightliuguoxing/Pic@main/image/os/1619513649377-OS3431.jpg" alt="EDF算法用于非抢占调度方式"></li>
+</ul>
+</li>
+<li>抢占式调度方式用于周期性实时任务</li>
+</ol>
+<div class="note default simple"><p>例1: 在一个实时系统中，有两个周期性实时任务A和B，<br>
+任务A要求每20ms执行一次，执行时间为10ms；<br>
+任务B只要求每50ms执行一次，执行时间为 25 ms。</p>
+</div>
+<h4 id="3-4-4-最低松弛度优先LLF-Least-Laxity-First-算法">3.4.4 最低松弛度优先LLF(Least Laxity First)算法</h4>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Nightliuguoxing/Pic@main/image/os/1619513738495-OS3440.jpg" alt="利用LLF算法进行调度的情况"></p>
+<h4 id="3-4-5-优先级倒置-priority-inversion-problem">3.4.5 优先级倒置(priority inversion problem)</h4>
+<ol>
+<li>优先级倒置的形成</li>
+<li>优先级倒置的解决方法</li>
+</ol>
+<hr>
+<p>有3个周期性任务：</p>
+<ul>
+<li>任务A要求每20ms执行一次，执行时间为10ms</li>
+<li>任务B要求每50ms执行一次，执行时间为10ms</li>
+<li>任务C要求每50ms执行一次，执行时间为15ms<br>
+应如何按最低松弛度优先算法对它们进行CPU调度？</li>
+</ul>
+<hr>
+<h2 id="3-5-死锁概述">3.5 死锁概述</h2>
+<h4 id="3-5-1-资源问题">3.5.1  资源问题</h4>
+<ol>
+<li>
+<p>可重用资源和消耗性资源</p>
+<ul>
+<li>可重用性资源: 是一种可供用户重复使用多次的资源
+<ul>
+<li>每一个可重用性资源中的单元只能分配给一个进程使用，不允许多个进程共享。</li>
+<li>进程在使用可重用性资源时，须按照这样的顺序： ①请求资源。如果请求资源失败，请求进程将会被阻塞或循环等待。②使用资源。进程对资源进行操作，如用打印机进行打印； ③释放资源。当进程使用完后自己释放资源。</li>
+<li>系统中每一类可重用性资源中的单元数目是相对固定的，进程在运行期间既不能创建也不能删除它。</li>
+</ul>
+</li>
+<li>临时性资源（可消耗性资源）:是指由一个进程产生，被另一个进程使用一短暂时间后便无用的资源，故也称之为消耗性资源（如进程通信中的消息），它也可能引起死锁
+<ul>
+<li>每一类可消耗性资源的单元数目在进程运行期间是可以不断变化的，有时它可以有许多，有时可能为0；</li>
+<li>进程在运行过程中，可以不断地创造可消耗性资源的单元，将它们放入该资源类的缓冲区中，以增加该资源类的单元数目。</li>
+<li>进程在运行过程中，可以请求若干个可消耗性资源单元，用于进程自己的消耗，不再将它们返回给该资源类中。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>可抢占性资源和不可抢占性资源（可剥夺和非剥夺性资源）</p>
+<ul>
+<li>可抢占性资源：是指某进程在获得这类资源后，该资源可以再被其他进程或系统剥夺，如CPU、内存。对这类资源的使用不会引起死锁。</li>
+<li>不可抢占性资源：当系统把这类资源分配给某进程后，再不能强行收回，只能在进程用完后自行释放，如刻录机、磁带机、打印机等。</li>
+</ul>
+</li>
+</ol>
+<h4 id="3-5-2-计算机系统中的死锁">3.5.2 计算机系统中的死锁</h4>
+<ol>
+<li>竞争不可抢占性资源引起死锁</li>
+<li>竞争可消耗性资源引起死锁
+<ul>
+<li><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Nightliuguoxing/Pic@main/image/os/1619513822963-OS3522.jpg" alt="进程之间通信时的死锁"></li>
+</ul>
+</li>
+<li>进程推进顺序不当引起死锁
+<ul>
+<li>进程推进顺序合法</li>
+<li>进程推进顺序非法</li>
+</ul>
+</li>
+</ol>
+<h4 id="3-5-3-死锁的定义、必要条件和处理方法">3.5.3 死锁的定义、必要条件和处理方法</h4>
+<ol>
+<li>死锁的定义
+<ul>
+<li>死锁的定义1：是指多个进程在运行过程中因竞争资源而造成的一种僵局。当进程处于这种僵持状态时，若无外力作用，它们都将无法再向前推进。</li>
+<li>死锁的定义2：如果一组进程中的每一个进程都在等待仅由该组进程中的其它进程才能引发的事件，那么该组进程是死锁的（Deadlock）。</li>
+</ul>
+</li>
+<li>产生死锁的必要条件
+<ul>
+<li>互斥条件: 进程访问的是临界资源，即在一段时间内某资源仅为一个进程占有。</li>
+<li>请求和保持条件: 当一个进程因请求资源而被阻塞时，对已经获得的资源保持不放。</li>
+<li>不可抢占条件:进程已经获得的资源，在未使用完之前，不能被其它进程剥夺，只能自己在使用完时由自己释放。</li>
+<li>循环等待条件:在发生死锁时，必然存在一个进程-资源的环形链，即若干进程之间形成一种头尾相连的循环等待资源的关系。</li>
+</ul>
+</li>
+<li>处理死锁的方法
+<ul>
+<li>预防死锁:通过设置某些限制条件，去破坏产生死锁的四个必要条件中的一个或几个条件，来预防发生死锁。</li>
+<li>避免死锁:不事先采取各种限制措施去破坏产生死锁的四个必要条件，而是在资源的动态分配过程中，用某种方法去防止系统进入不安全状态，从而避免发生死锁。</li>
+<li>检测死锁: 不事先采取任何限制性措施，也不必检查系统是否已经进入不安全区，而是允许系统在运行过程中发生死锁。但可通过系统设置的检查机构，及时地检测出死锁的发生，并精确地确定与死锁有关的进程和资源。然后，采取适当措施，从系统中将已发生的死锁清除掉。</li>
+<li>解除死锁: 这是与检测死锁相配套的一种措施。常用的实施方法是撤销或挂起一些进程，以便回收一些资源，再将这些资源分配给已处于阻塞状态的进程，使之转为就绪状态，以继续运行。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p>例1: 考虑n个进程共享的、具有m个同类资源的系统。<br>
+证明：如果对于I=1，2，…，n有Need&gt;0而且所有的最大需求量之和小于m+n，那么该系统是死锁无关的。</p>
+<hr>
+<p>例2: 设系统中仅有一类独占资源，进程一次只能申请一个资源，系统中多个进程竞争该类资源。试判断下述哪些情况会发生死锁，为什么？</p>
+<ul>
+<li>资源数为4，进程数为3，每个进程最多需要2个资源。</li>
+<li>资源数为6，进程数为2，每个进程最多需要4个资源。</li>
+<li>资源数为8，进程数为3，每个进程最多需要3个资源。</li>
+<li>资源数为20，进程数为8，每个进程最多需要2个资源。</li>
+</ul>
+<hr>
+<h2 id="3-6-预防死锁">3.6 预防死锁</h2>
+<h4 id="3-6-1-破坏“请求和保持”条件">3.6.1 破坏“请求和保持”条件</h4>
+<ol>
+<li>第一种协议：一次性申请
+<ul>
+<li>缺点：
+<ul>
+<li>资源被严重浪费</li>
+<li>使进程延迟运行</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>第二种协议：
+<ul>
+<li>方法：它允许一个进程只获得运行初期所需的资源后，便开始运行。进程运行过程中再逐步释放已分配给自己的、且已用毕的全部资源，然后再请求新的所需资源。</li>
+<li>优点：能使进程更快地完成任务，提高设备的利用率，还可减少进程发生饥饿的机率。</li>
+</ul>
+</li>
+</ol>
+<h4 id="3-6-2-破坏“不可抢占”条件">3.6.2 破坏“不可抢占”条件</h4>
+<ul>
+<li>方法：逐个申请；提出新的资源请求得不到满足时必须释放已保持的所有资源，以后需要时再重新申请。</li>
+<li>缺点：实现起来比较复杂且要付出很大的代价，还可能因为反复地申请和释放资源致使进程的执行被无限地推迟。</li>
+</ul>
+<h4 id="3-6-3-破坏“循环等待”条件">3.6.3 破坏“循环等待”条件</h4>
+<ul>
+<li>方法：系统将所有资源按类型进行线性排队，并赋予不同的序号。所有进程对资源的请求必须严格按照资源序号递增的次序提出。</li>
+<li>缺点：
+<ul>
+<li>因为系统中各类资源的序号必须相对稳定，所以限制了新类型设备的增加；</li>
+<li>作业使用各类资源的顺序可能与系统规定的顺序不同，因而造成对资源的浪费；</li>
+<li>按规定次序申请的方法，限制了用户简单、自主地编程。</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-7-避免死锁">3.7 避免死锁</h2>
+<h4 id="3-7-1-系统安全状态">3.7.1 系统安全状态</h4>
+<ol>
+<li>
+<p>安全状态</p>
+</li>
+<li>
+<h2 id="安全状态之例">安全状态之例</h2>
+<p>假定系统中有三个进程P1、P2和P3，共有12台磁带机。进程P1总共要求10台磁带机，P2和P3分别要求4台和9台。假设在T0时刻，进程P1、P2和P3已分别获得5台、2台和2台磁带机，尚有3台空闲未分配。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">进程</th>
+<th style="text-align:center">最大需求</th>
+<th style="text-align:center">已分配</th>
+<th style="text-align:center">可用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">P1</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">P2</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">P3</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</li>
+<li>
+<p>由安全状态向不安全状态的转换</p>
+</li>
+</ol>
+<h2 id="3-7-2-利用银行家算法避免死锁">3.7.2 利用银行家算法避免死锁</h2>
+<ol>
+<li>
+<p>银行家算法中的数据结构</p>
+<ul>
+<li>可利用资源向量<code>Available</code></li>
+<li>最大需求矩阵<code>Max</code></li>
+<li>分配矩阵<code>Allocation</code></li>
+<li>需求矩阵<code>Need</code></li>
+</ul>
+</li>
+<li>
+<p>银行家算法</p>
+<ul>
+<li>设Requesti是进程Pi的请求向量，如果Requesti［j］=K，表示进程Pi需要K个Rj类型的资源。当Pi发出资源请求后，系统按下述步骤进行检查：</li>
+</ul>
+<ol>
+<li>如果Requesti［j］≤Need［i,j］，便转向步骤2；否则认为出错，因为它所需要的资源数已超过它所宣布的最大值。</li>
+<li>如果Requesti［j］≤Available［j］，便转向步骤(3)；否则， 表示尚无足够资源，Pi须等待。</li>
+<li>系统试探着把资源分配给进程Pi，并修改下面数据结构中的数值：
+<ul>
+<li>Available［j］=Available［j］-Requesti［j］;</li>
+<li>Allocation［i,j］=Allocation［i,j］+Requesti［j］;</li>
+<li>Need［i,j］=Need［i,j］-Requesti［j］;</li>
+</ul>
+</li>
+<li>系统执行安全性算法，检查此次资源分配后，系统是否处于安全状态。若安全，才正式将资源分配给进程Pi，以完成本次分配；否则，将本次的试探分配作废，恢复原来的资源分配状态，让进程Pi等待。</li>
+</ol>
+</li>
+<li>
+<p>安全性算法</p>
+<ol>
+<li>设置两个向量：
+<ul>
+<li>工作向量Work：它表示系统可提供给进程继续运行所需的各类资源数目，它含有m个元素，在执行安全性算法开始时，Work=Available;</li>
+<li>Finish：它表示系统是否有足够的资源分配给进程，使之运行完成。开始时先做Finish[i]=false; 当有足够资源分配给进程时，再令Finish[i]=true。</li>
+</ul>
+</li>
+<li>从进程集合中找到一个能满足下述条件的进程：
+<ul>
+<li>Finish［i］=false;</li>
+<li>Need［i,j］≤Work［j］；</li>
+<li>若找到， 执行步骤(3)， 否则，执行步骤(4)。</li>
+</ul>
+</li>
+<li>当进程Pi获得资源后，可顺利执行，直至完成，并释放出分配给它的资源，故应执行：<br>
+Work［j］=Work［i］+Allocation［i,j］;<br>
+Finish［i］=true;<br>
+go to step 2;</li>
+<li>如果所有进程的Finish［i］=true都满足，则表示系统处于安全状态；否则，系统处于不安全状态。</li>
+</ol>
+</li>
+<li>
+<h2 id="银行家算法之例">银行家算法之例</h2>
+<p>假定系统中有五个进程｛P0, P1, P2, P3, P4｝和三类资源｛A, B, C｝，各种资源的数量分别为10、5、7，在T0时刻的资源分配情况如图 3-16所示。<br>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Nightliuguoxing/Pic@main/image/os/1619513889685-OS3724.jpg" alt=""></p>
+<hr>
+</li>
+</ol>
+<h2 id="3-8-死锁的检测与解除">3.8 死锁的检测与解除</h2>
+<h4 id="3-8-1-死锁的检测">3.8.1 死锁的检测</h4>
+<ul>
+<li>当系统为进程分配资源时，若未采取任何限制性措施，则系统必须提供检测和解除死锁的手段，为此，系统必须做到：
+<ul>
+<li>保存有关资源的请求和分配信息；</li>
+<li>提供一种算法，利用这些信息来检测系统是否已进入死锁状态。</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>资源分配图(Resource Allocation Graph)</li>
+<li>死锁定理
+<ul>
+<li><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Nightliuguoxing/Pic@main/image/os/1619513972118-OS3812.jpg" alt="资源分配图的简化"></li>
+</ul>
+</li>
+<li>死锁检测中的数据结构
+<ul>
+<li>工作向量Work：它表示系统可提供给进程继续运行所需的各类资源数目，初始时Work=Available。</li>
+<li>把不占用资源的进程Li (向量Allocation=0并且Requesti=0)记入L表中， 即L=Li∪L。</li>
+<li>从进程集合中找到一个Requesti≤Work的进程，做如下处理：① 将其资源分配图简化，释放出资源，增加工作向量Work=Work+Allocationi。 ② 将它记入L表中。</li>
+<li>若不能把所有进程都记入L表中，便表明系统状态S的资源分配图是不可完全简化的。因此，该系统状态将发生死锁。</li>
+</ul>
+</li>
+</ol>
+<h4 id="3-8-2-死锁的解除">3.8.2 死锁的解除</h4>
+<ul>
+<li>当发现有死锁时，便立即把它们从死锁状态中解脱出来。常采用解除死锁的方法是：
+<ul>
+<li>抢占资源。从一个或多个进程中抢占足够数量的资源，分配给死锁进程，以解除死锁状态。</li>
+<li>终止（或撤消）进程：全部终止（或撤销）或按某种顺序终止（或撤销）死锁进程，打破循环环路，使系统从死锁状态解脱出来。</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>终止进程的方法
+<ul>
+<li>逐个终止进程时，选择被终止进程时应考虑的因素有：
+<ul>
+<li>进程的优先级大小；</li>
+<li>进程已执行了多少时间，还需要多少时间方能完成；</li>
+<li>进程在运行中已经使用资源的多少，以后还需要多少资源？</li>
+<li>进程的性质是交互式的还是批处理式的？</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>付出代价最小的死锁解除算法
+<ul>
+<li>解除死锁时，可使撤销的进程数目最少，也可以选择撤销进程所付出的代价最小。为把系统从死锁状态中解脱出来，所花费的代价可表示为：</li>
+<li>R(S)min=min{Cui}+min{Cuj}+min{Cuk}+…</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p>练习: 某系统T0时刻的资源分配情况如下所示</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Allocation</th>
+<th style="text-align:center">Need</th>
+<th style="text-align:center">Avaliable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">A</td>
+<td style="text-align:center">3 1 1</td>
+<td style="text-align:center">1 0 0</td>
+<td style="text-align:center">1 2 0</td>
+</tr>
+<tr>
+<td style="text-align:center">B</td>
+<td style="text-align:center">0 0 0</td>
+<td style="text-align:center">0 1 2</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">C</td>
+<td style="text-align:center">1 1 0</td>
+<td style="text-align:center">3 0 0</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">D</td>
+<td style="text-align:center">1 0 1</td>
+<td style="text-align:center">0 1 0</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">E</td>
+<td style="text-align:center">0 0 0</td>
+<td style="text-align:center">2 1 0</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">试问：</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>该状态是否安全？</li>
+<li>若进程B提出请求RequestB(0,1,0)，系统能否将资源分配给它？</li>
+</ul>
+<hr>
+<h2 id="强化一-作业调度算法">强化一: 作业调度算法</h2>
+<hr>
+<p>例1: 先来先服务调度算法<br>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Nightliuguoxing/Pic@main/image/os/1619514090284-OS3EG1.jpg" alt="先来先服务调度算法"></p>
+<ul>
+<li>说明：采用该算法时，系统按照作业到达的先后次序来进行调度。该算法既可以用于作业调度，也可以用于进程调度。一般与其它算法结合使用。</li>
+<li>优缺点：对长作业有利，对短作业不利。</li>
+</ul>
+<hr>
+<p>例2: 短作业(进程)优先调度算法<br>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Nightliuguoxing/Pic@main/image/os/1619514167848-OS3EG2.jpg" alt="短作业(进程)优先调度算法"><br>
+周转时间=完成时间-到达时间<br>
+带权周转时间=周转时间/服务时间</p>
+<hr>
+<p>例3: 单道批处理系统中有4个进程，其有关情况如下表所示，采用响应比高者优先调度算法时，计算其平均周转时间和平均带权周转时间。（请写出计算过程）</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">进程名</th>
+<th style="text-align:center">提交时间</th>
+<th style="text-align:center">运行时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">P1</td>
+<td style="text-align:center">8.0</td>
+<td style="text-align:center">2.0</td>
+</tr>
+<tr>
+<td style="text-align:center">P2</td>
+<td style="text-align:center">8.6</td>
+<td style="text-align:center">0.6</td>
+</tr>
+<tr>
+<td style="text-align:center">P3</td>
+<td style="text-align:center">8.8</td>
+<td style="text-align:center">0.2</td>
+</tr>
+<tr>
+<td style="text-align:center">P4</td>
+<td style="text-align:center">9.0</td>
+<td style="text-align:center">0.5</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>例4: 有一个具有两道作业的批处理系统，作业调度采用短作业优先的调度算法，进程调度采用以优先数为基础的抢占式调度算法。在下表所示的作业序列，作业优先数即为进程优先数，优先数越小优先级越高。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">作业号</th>
+<th style="text-align:center">到达时间</th>
+<th style="text-align:center">估计运行时间（分钟）</th>
+<th style="text-align:center">优先数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">A</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">40</td>
+<td style="text-align:center">5</td>
+</tr>
+<tr>
+<td style="text-align:center">B</td>
+<td style="text-align:center">10:20</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">3</td>
+</tr>
+<tr>
+<td style="text-align:center">C</td>
+<td style="text-align:center">10:30</td>
+<td style="text-align:center">50</td>
+<td style="text-align:center">4</td>
+</tr>
+<tr>
+<td style="text-align:center">D</td>
+<td style="text-align:center">10:50</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">6</td>
+</tr>
+</tbody>
+</table>
+<p>要求：</p>
+<ul>
+<li>列出所有作业进入内存时间及结束时间</li>
+<li>计算平均周转时间(以分钟计算)</li>
+</ul>
+<hr>
+<p>例5: 在一个单道批处理系统中，一组作业的提交时刻和运行时间如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">作业名</th>
+<th style="text-align:center">提交时间/h</th>
+<th style="text-align:center">运行时间/h</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">J1</td>
+<td style="text-align:center">8.0</td>
+<td style="text-align:center">1.0</td>
+</tr>
+<tr>
+<td style="text-align:center">J2</td>
+<td style="text-align:center">8.5</td>
+<td style="text-align:center">0.5</td>
+</tr>
+<tr>
+<td style="text-align:center">J3</td>
+<td style="text-align:center">9.0</td>
+<td style="text-align:center">0.2</td>
+</tr>
+<tr>
+<td style="text-align:center">J4</td>
+<td style="text-align:center">9.1</td>
+<td style="text-align:center">0.1</td>
+</tr>
+</tbody>
+</table>
+<p>试计算下列三种作业调度算法的平均周转时间T和带权周转时间W。</p>
+<ul>
+<li>先来先服务</li>
+<li>短作业优先</li>
+<li>响应比高者优先</li>
+</ul>
+<hr>
+<p>例6: 我们如果为一个作业只建立一个进程，则为了照顾短作业用户，应采用（A）；为照顾紧急作业用户应采用（B）；为能实现人机交互作用应采用（C）；为了兼顾短作业和长时间等待的作业应采用（D）； 为了使短作业、长作业及交互作业用户都比较满意应采用（E）；为了使作业的平均周转时间短应采用（F）算法。<br>
+A，B，C, D, E, F：<br>
+（1）FCFS调度算法；<br>
+（2）短作业优先；<br>
+（3）时间片轮转法；<br>
+（4）多级反馈队列调度算法；<br>
+（5）基于优先权的剥夺调度算法；<br>
+（6）高响应比优先<br>
+答：<br>
+A:（2）短作业优先；<br>
+B:（5）基于优先权的剥夺调度算法；<br>
+C:（3）时间片轮转法；<br>
+D:（6）高响应比优先；<br>
+E:（4）多级反馈队列调度算法；<br>
+F:（2）短作业优先</p>
+<hr>
+<h2 id="强化二-银行家算法">强化二: 银行家算法</h2>
+<hr>
+<p>例1: 考虑n个进程共享的、具有m个同类资源的系统。证明：如果对于I=1,2,…,n有Need&gt;0而且所有的最大需求量之和小于m+n，那么该系统是死锁无关的。</p>
+<hr>
+<p>例2: 设系统中仅有一类独占资源，进程一次只能申请一个资源，系统中多个进程竞争该类资源。试判断下述哪些情况会发生死锁，为什么？</p>
+<ol>
+<li>资源数为4，进程数为3，每个进程最多需要2个资源。</li>
+<li>资源数为6，进程数为2，每个进程最多需要4个资源。</li>
+<li>资源数为8，进程数为3，每个进程最多需要3个资源。</li>
+<li>资源数为20，进程数为8，每个进程最多需要2个资源。</li>
+</ol>
+<hr>
+<p>例3: 某系统有R1、R2、R3共三种资源，在T0时刻，P1、P2、P3和P4这4个进程对资源的占有和需求情况见下表，此刻系统可用资源向量为（2，1，2）。</p>
+<ol>
+<li>将系统资源总数和此刻各进程对资源的需求数目用向量、矩阵表示出来。</li>
+<li>如果此时P1和P2均发出资源请求向量Request（1，0，1），为了保持系统安全性，应该如何分配资源给这两个进程？</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">进程名</th>
+<th style="text-align:center">最大资源需求量</th>
+<th style="text-align:center">已分配的资源数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">P1</td>
+<td style="text-align:center">3 2 2</td>
+<td style="text-align:center">1 0 0</td>
+</tr>
+<tr>
+<td style="text-align:center">P2</td>
+<td style="text-align:center">6 1 3</td>
+<td style="text-align:center">4 1 1</td>
+</tr>
+<tr>
+<td style="text-align:center">P3</td>
+<td style="text-align:center">3 1 4</td>
+<td style="text-align:center">2 1 1</td>
+</tr>
+<tr>
+<td style="text-align:center">P4</td>
+<td style="text-align:center">4 2 2</td>
+<td style="text-align:center">0 0 2</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>例4: 在银行家算法中，系统的资源数量为（10，5，7）。经过一段时间的分配后，资源分配与占用情况见下表:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">资源进程</th>
+<th style="text-align:center">已分配资源<br />A  B  C</th>
+<th style="text-align:center">最大资源<br /> A  B  C</th>
+<th style="text-align:center">还需求资源<br />A  B  C</th>
+<th style="text-align:center">可用资源量<br />A  B  C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">P0</td>
+<td style="text-align:center">0  1  0</td>
+<td style="text-align:center">7  5  3</td>
+<td style="text-align:center">7  4  3</td>
+<td style="text-align:center">2  3  0</td>
+</tr>
+<tr>
+<td style="text-align:center">P1</td>
+<td style="text-align:center">3  0  2</td>
+<td style="text-align:center">3  2  2</td>
+<td style="text-align:center">0  2  0</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">P2</td>
+<td style="text-align:center">3  0  2</td>
+<td style="text-align:center">9  0  2</td>
+<td style="text-align:center">6  0  0</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">P3</td>
+<td style="text-align:center">2  1  1</td>
+<td style="text-align:center">2  2  2</td>
+<td style="text-align:center">0  1  1</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">P4</td>
+<td style="text-align:center">0  0  2</td>
+<td style="text-align:center">4  3  3</td>
+<td style="text-align:center">4  3  1</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>请分析该状态是否是安全的？</li>
+<li>若进程P0提出请求Request（0，1，0）后，系统能否将资源分配给它？</li>
+</ol>
+<hr>
+<p>例5: 某系统中有5个进程和4类资源，在T0时刻的资源分配情况如下表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">资源进程</th>
+<th style="text-align:center">已分配资源<br />R1 R2 R3 R4</th>
+<th style="text-align:center">还需求资源<br />R1 R2 R3 R4</th>
+<th style="text-align:center">可用资源量<br />R1 R2 R3 R4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">P0</td>
+<td style="text-align:center">0  0  3  2</td>
+<td style="text-align:center">0  0  1  2</td>
+<td style="text-align:center">1  6  2  2</td>
+</tr>
+<tr>
+<td style="text-align:center">P1</td>
+<td style="text-align:center">1  0  0  0</td>
+<td style="text-align:center">1  7  5  0</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">P2</td>
+<td style="text-align:center">1  3  5  4</td>
+<td style="text-align:center">2  3  5  6</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">P3</td>
+<td style="text-align:center">0  3  3  2</td>
+<td style="text-align:center">0  6  5  2</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">P4</td>
+<td style="text-align:center">0  0  1  4</td>
+<td style="text-align:center">0  6  5  6</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>该时刻系统是否安全？请分析。</li>
+<li>如果进程P2提出请求（1, 2, 2, 2），系统能否将资源分配给它？</li>
+</ol>
+<hr>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Nightliuguoxing/Pic@main/pics/avatar.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Nightliuguoxing/Pic@main/pics/avatar.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">LGX</div><div class="post-copyright__author_desc"></div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://liuguoxings.github.io/OS/OS03/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://liuguoxings.github.io/OS/OS03/')">第三章 操作系统 处理机调度与死锁</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://liuguoxings.github.io/OS/OS03/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=第三章 操作系统 处理机调度与死锁&amp;url=https://liuguoxings.github.io/OS/OS03/&amp;pic=" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://liuguoxings.github.io" target="_blank">LGX</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>操作系统<span class="tagsPageCount">7</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://raw.githubusercontent.com/liuguoxings/Pic/main/pics/20250805153725905.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/OS/OP/OSOP2/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">操作系统 实验 - OP2</div></div></a></div><div class="next-post pull-right"><a href="/OS/OS04/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">第四章 操作系统 存储器管理</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/OS/OS00/" title="操作系统 学习大纲"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2021-05-03</div><div class="title">操作系统 学习大纲</div></div></a></div><div><a href="/OS/OS01/" title="第一章 操作系统 操作系统引论"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2021-05-06</div><div class="title">第一章 操作系统 操作系统引论</div></div></a></div><div><a href="/OS/OS02/" title="第二章 操作系统 进程的描述与控制"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2021-05-09</div><div class="title">第二章 操作系统 进程的描述与控制</div></div></a></div><div><a href="/OS/OS04/" title="第四章 操作系统 存储器管理"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2021-05-15</div><div class="title">第四章 操作系统 存储器管理</div></div></a></div><div><a href="/OS/OP/OSOP2/" title="操作系统 实验 - OP2"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2021-05-12</div><div class="title">操作系统 实验 - OP2</div></div></a></div><div><a href="/OS/OP/OSOP1/" title="操作系统 实验 - OP1"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2021-04-28</div><div class="title">操作系统 实验 - OP1</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Nightliuguoxing/Pic@main/pics/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/08/24/64e6ce9c507bb.png" alt="status"/></div></div><div class="author-info__description">非淡泊无以明志，非宁静无以致远。</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">LGX</h1><div class="author-info__desc"></div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/liuguoxings" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%A4%84%E7%90%86%E6%9C%BA%E8%B0%83%E5%BA%A6%E4%B8%8E%E6%AD%BB%E9%94%81"><span class="toc-number">1.</span> <span class="toc-text">第三章 处理机调度与死锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E5%A4%84%E7%90%86%E6%9C%BA%E8%B0%83%E5%BA%A6%E7%9A%84%E5%B1%82%E6%AC%A1%E5%92%8C%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95%E7%9A%84%E7%9B%AE%E6%A0%87"><span class="toc-number">2.</span> <span class="toc-text">3.1 处理机调度的层次和调度算法的目标</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-1-%E5%A4%84%E7%90%86%E6%9C%BA%E8%B0%83%E5%BA%A6%E7%9A%84%E5%B1%82%E6%AC%A1"><span class="toc-number">2.0.1.</span> <span class="toc-text">3.1.1 处理机调度的层次</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-2-%E5%A4%84%E7%90%86%E6%9C%BA%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95%E7%9A%84%E7%9B%AE%E6%A0%87"><span class="toc-number">2.0.2.</span> <span class="toc-text">3.1.2 处理机调度算法的目标</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E4%BD%9C%E4%B8%9A%E4%B8%8E%E4%BD%9C%E4%B8%9A%E8%B0%83%E5%BA%A6"><span class="toc-number">3.</span> <span class="toc-text">3.2 作业与作业调度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-1-%E6%89%B9%E5%A4%84%E7%90%86%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E4%BD%9C%E4%B8%9A"><span class="toc-number">3.0.1.</span> <span class="toc-text">3.2.1 批处理系统中的作业</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-2-%E4%BD%9C%E4%B8%9A%E8%B0%83%E5%BA%A6%E7%9A%84%E4%B8%BB%E8%A6%81%E4%BB%BB%E5%8A%A1"><span class="toc-number">3.0.2.</span> <span class="toc-text">3.2.2 作业调度的主要任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-3-%E5%85%88%E6%9D%A5%E5%85%88%E6%9C%8D%E5%8A%A1-FCFS-%E5%92%8C%E7%9F%AD%E4%BD%9C%E4%B8%9A%E4%BC%98%E5%85%88-SJF%EF%BC%89%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="toc-number">3.0.3.</span> <span class="toc-text">3.2.3 先来先服务(FCFS)和短作业优先(SJF）调度算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-4-%E4%BC%98%E5%85%88%E7%BA%A7%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95%E5%92%8C%E9%AB%98%E5%93%8D%E5%BA%94%E6%AF%94%E4%BC%98%E5%85%88%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="toc-number">3.0.4.</span> <span class="toc-text">3.2.4 优先级调度算法和高响应比优先调度算法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6"><span class="toc-number">4.</span> <span class="toc-text">3.3 进程调度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-1-%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%9A%84%E4%BB%BB%E5%8A%A1%E3%80%81%E6%9C%BA%E5%88%B6%E5%92%8C%E6%96%B9%E5%BC%8F"><span class="toc-number">4.0.1.</span> <span class="toc-text">3.3.1 进程调度的任务、机制和方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-2-%E8%BD%AE%E8%BD%AC%EF%BC%88RR%EF%BC%89%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="toc-number">4.0.2.</span> <span class="toc-text">3.3.2 轮转（RR）调度算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-3-%E4%BC%98%E5%85%88%E7%BA%A7%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="toc-number">4.0.3.</span> <span class="toc-text">3.3.3 优先级调度算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-4-%E5%A4%9A%E9%98%9F%E5%88%97%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="toc-number">4.0.4.</span> <span class="toc-text">3.3.4 多队列调度算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-5-%E5%A4%9A%E7%BA%A7%E5%8F%8D%E9%A6%88%E9%98%9F%E5%88%97%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="toc-number">4.0.5.</span> <span class="toc-text">3.3.5 多级反馈队列调度算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-6-%E5%9F%BA%E4%BA%8E%E5%85%AC%E5%B9%B3%E5%8E%9F%E5%88%99%E7%9A%84%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="toc-number">4.0.6.</span> <span class="toc-text">3.3.6  基于公平原则的调度算法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-%E5%AE%9E%E6%97%B6%E8%B0%83%E5%BA%A6"><span class="toc-number">5.</span> <span class="toc-text">3.4 实时调度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-1-%E5%AE%9E%E7%8E%B0%E5%AE%9E%E6%97%B6%E8%B0%83%E5%BA%A6%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9D%A1%E4%BB%B6"><span class="toc-number">5.0.1.</span> <span class="toc-text">3.4.1 实现实时调度的基本条件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-2-%E5%AE%9E%E6%97%B6%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">5.0.2.</span> <span class="toc-text">3.4.2 实时调度算法的分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-3-%E6%9C%80%E6%97%A9%E6%88%AA%E6%AD%A2%E6%97%B6%E9%97%B4%E4%BC%98%E5%85%88%E5%8D%B3EDF-Earliest-Deadline-First-%E7%AE%97%E6%B3%95"><span class="toc-number">5.0.3.</span> <span class="toc-text">3.4.3 最早截止时间优先即EDF(Earliest Deadline First)算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-4-%E6%9C%80%E4%BD%8E%E6%9D%BE%E5%BC%9B%E5%BA%A6%E4%BC%98%E5%85%88LLF-Least-Laxity-First-%E7%AE%97%E6%B3%95"><span class="toc-number">5.0.4.</span> <span class="toc-text">3.4.4 最低松弛度优先LLF(Least Laxity First)算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-5-%E4%BC%98%E5%85%88%E7%BA%A7%E5%80%92%E7%BD%AE-priority-inversion-problem"><span class="toc-number">5.0.5.</span> <span class="toc-text">3.4.5 优先级倒置(priority inversion problem)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-%E6%AD%BB%E9%94%81%E6%A6%82%E8%BF%B0"><span class="toc-number">6.</span> <span class="toc-text">3.5 死锁概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-1-%E8%B5%84%E6%BA%90%E9%97%AE%E9%A2%98"><span class="toc-number">6.0.1.</span> <span class="toc-text">3.5.1  资源问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-2-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E6%AD%BB%E9%94%81"><span class="toc-number">6.0.2.</span> <span class="toc-text">3.5.2 计算机系统中的死锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-3-%E6%AD%BB%E9%94%81%E7%9A%84%E5%AE%9A%E4%B9%89%E3%80%81%E5%BF%85%E8%A6%81%E6%9D%A1%E4%BB%B6%E5%92%8C%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95"><span class="toc-number">6.0.3.</span> <span class="toc-text">3.5.3 死锁的定义、必要条件和处理方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6-%E9%A2%84%E9%98%B2%E6%AD%BB%E9%94%81"><span class="toc-number">7.</span> <span class="toc-text">3.6 预防死锁</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-6-1-%E7%A0%B4%E5%9D%8F%E2%80%9C%E8%AF%B7%E6%B1%82%E5%92%8C%E4%BF%9D%E6%8C%81%E2%80%9D%E6%9D%A1%E4%BB%B6"><span class="toc-number">7.0.1.</span> <span class="toc-text">3.6.1 破坏“请求和保持”条件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-6-2-%E7%A0%B4%E5%9D%8F%E2%80%9C%E4%B8%8D%E5%8F%AF%E6%8A%A2%E5%8D%A0%E2%80%9D%E6%9D%A1%E4%BB%B6"><span class="toc-number">7.0.2.</span> <span class="toc-text">3.6.2 破坏“不可抢占”条件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-6-3-%E7%A0%B4%E5%9D%8F%E2%80%9C%E5%BE%AA%E7%8E%AF%E7%AD%89%E5%BE%85%E2%80%9D%E6%9D%A1%E4%BB%B6"><span class="toc-number">7.0.3.</span> <span class="toc-text">3.6.3 破坏“循环等待”条件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-7-%E9%81%BF%E5%85%8D%E6%AD%BB%E9%94%81"><span class="toc-number">8.</span> <span class="toc-text">3.7 避免死锁</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-7-1-%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E7%8A%B6%E6%80%81"><span class="toc-number">8.0.1.</span> <span class="toc-text">3.7.1 系统安全状态</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E7%8A%B6%E6%80%81%E4%B9%8B%E4%BE%8B"><span class="toc-number">9.</span> <span class="toc-text">安全状态之例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-7-2-%E5%88%A9%E7%94%A8%E9%93%B6%E8%A1%8C%E5%AE%B6%E7%AE%97%E6%B3%95%E9%81%BF%E5%85%8D%E6%AD%BB%E9%94%81"><span class="toc-number">10.</span> <span class="toc-text">3.7.2 利用银行家算法避免死锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%93%B6%E8%A1%8C%E5%AE%B6%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BE%8B"><span class="toc-number">11.</span> <span class="toc-text">银行家算法之例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-8-%E6%AD%BB%E9%94%81%E7%9A%84%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%A7%A3%E9%99%A4"><span class="toc-number">12.</span> <span class="toc-text">3.8 死锁的检测与解除</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-8-1-%E6%AD%BB%E9%94%81%E7%9A%84%E6%A3%80%E6%B5%8B"><span class="toc-number">12.0.1.</span> <span class="toc-text">3.8.1 死锁的检测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-8-2-%E6%AD%BB%E9%94%81%E7%9A%84%E8%A7%A3%E9%99%A4"><span class="toc-number">12.0.2.</span> <span class="toc-text">3.8.2 死锁的解除</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%BA%E5%8C%96%E4%B8%80-%E4%BD%9C%E4%B8%9A%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="toc-number">13.</span> <span class="toc-text">强化一: 作业调度算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%BA%E5%8C%96%E4%BA%8C-%E9%93%B6%E8%A1%8C%E5%AE%B6%E7%AE%97%E6%B3%95"><span class="toc-number">14.</span> <span class="toc-text">强化二: 银行家算法</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Matlab/M06/" title="M06 - 灰色关联分析 &amp; 灰色预测模型"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://raw.githubusercontent.com/liuguoxings/Pic/main/pics/20250805153725905.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="M06 - 灰色关联分析 &amp; 灰色预测模型"/></a><div class="content"><a class="title" href="/Matlab/M06/" title="M06 - 灰色关联分析 &amp; 灰色预测模型">M06 - 灰色关联分析 &amp; 灰色预测模型</a><time datetime="2022-08-03T16:00:00.000Z" title="发表于 2022-08-04 00:00:00">2022-08-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/YOLO/Y001/" title="Y001 第一章 深度学习经典检测方法概述"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://raw.githubusercontent.com/liuguoxings/Pic/main/pics/20250805153951001.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Y001 第一章 深度学习经典检测方法概述"/></a><div class="content"><a class="title" href="/YOLO/Y001/" title="Y001 第一章 深度学习经典检测方法概述">Y001 第一章 深度学习经典检测方法概述</a><time datetime="2022-08-02T16:00:00.000Z" title="发表于 2022-08-03 00:00:00">2022-08-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/JAVA/J04/" title="J04 - MongoDB的使用"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://raw.githubusercontent.com/liuguoxings/Pic/main/pics/20250805153036862.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="J04 - MongoDB的使用"/></a><div class="content"><a class="title" href="/JAVA/J04/" title="J04 - MongoDB的使用">J04 - MongoDB的使用</a><time datetime="2022-07-21T16:00:00.000Z" title="发表于 2022-07-22 00:00:00">2022-07-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/JAVA/J03/" title="J03 - Redis的使用"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://raw.githubusercontent.com/liuguoxings/Pic/main/pics/20250805153036862.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="J03 - Redis的使用"/></a><div class="content"><a class="title" href="/JAVA/J03/" title="J03 - Redis的使用">J03 - Redis的使用</a><time datetime="2022-07-20T16:00:00.000Z" title="发表于 2022-07-21 00:00:00">2022-07-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/JAVA/J02/" title="J02 - SpringCache的使用"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://raw.githubusercontent.com/liuguoxings/Pic/main/pics/20250805153036862.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="J02 - SpringCache的使用"/></a><div class="content"><a class="title" href="/JAVA/J02/" title="J02 - SpringCache的使用">J02 - SpringCache的使用</a><time datetime="2022-07-18T16:00:00.000Z" title="发表于 2022-07-19 00:00:00">2022-07-19</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2025 By <a class="footer-bar-link" href="/" title="LGX" target="_blank">LGX</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">90</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">7</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://liuguoxings.github.io/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AOP/" style="font-size: 0.88rem;">AOP<sup>1</sup></a><a href="/tags/Go%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/" style="font-size: 0.88rem;">Go基础教程<sup>5</sup></a><a href="/tags/Machine-Learning/" style="font-size: 0.88rem;">Machine Learning<sup>63</sup></a><a href="/tags/Matlab/" style="font-size: 0.88rem;">Matlab<sup>5</sup></a><a href="/tags/MongoDB/" style="font-size: 0.88rem;">MongoDB<sup>1</sup></a><a href="/tags/Python%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/" style="font-size: 0.88rem;">Python基础教程<sup>4</sup></a><a href="/tags/Redis/" style="font-size: 0.88rem;">Redis<sup>1</sup></a><a href="/tags/SpringCache/" style="font-size: 0.88rem;">SpringCache<sup>1</sup></a><a href="/tags/YOLO/" style="font-size: 0.88rem;">YOLO<sup>1</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 0.88rem;">操作系统<sup>7</sup></a><a href="/tags/%E6%97%A5%E5%BF%97%E5%88%87%E9%9D%A2/" style="font-size: 0.88rem;">日志切面<sup>1</sup></a><a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 0.88rem;">深度学习<sup>1</sup></a><a href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/" style="font-size: 0.88rem;">目标检测<sup>1</sup></a><a href="/tags/%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/" style="font-size: 0.88rem;">系列教程<sup>5</sup></a><a href="/tags/%E7%BC%93%E5%AD%98%E6%B3%A8%E8%A7%A3/" style="font-size: 0.88rem;">缓存注解<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("04/01/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.6.14",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 LGX 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

@@ -1,0 +1,955 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>第一章 操作系统 操作系统引论 | LGX</title><meta name="keywords" content="操作系统, 操作系统引论"><meta name="author" content="LGX"><meta name="copyright" content="LGX"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#18171d"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="第一章 操作系统 操作系统引论"><meta name="application-name" content="第一章 操作系统 操作系统引论"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#18171d"><meta property="og:type" content="article"><meta property="og:title" content="第一章 操作系统 操作系统引论"><meta property="og:url" content="https://liuguoxings.github.io/OS/OS01/index.html"><meta property="og:site_name" content="LGX"><meta property="og:description" content="第一章 操作系统引论   【目的要求】  [了解]OS的引入和发展; [理解]多道程序设计技术; [掌握]操作系统的功能和特征、操作系统的分类; [了解]操作系统的结构设计.    【重点与难点】  操作系统的功能和特征; 操作系统的分类.     1.1 操作系统的目标和作用 1.1.1 操作系统"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/Nightliuguoxing/Pic@main/pics/avatar.jpg"><meta property="article:author" content="LGX"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Nightliuguoxing/Pic@main/pics/avatar.jpg"><meta name="description" content="第一章 操作系统引论   【目的要求】  [了解]OS的引入和发展; [理解]多道程序设计技术; [掌握]操作系统的功能和特征、操作系统的分类; [了解]操作系统的结构设计.    【重点与难点】  操作系统的功能和特征; 操作系统的分类.     1.1 操作系统的目标和作用 1.1.1 操作系统"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://liuguoxings.github.io/OS/OS01/"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2024/07/27/125766904/ba62475f396df9de3316a08ed9e65d86_5680958632268053399..png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🏠 智能家居小能手","🔨 设计开发一条龙","🤝 专修交互与设计","🏃 脚踏实地行动派","🧱 团队小组发动机","💢 壮汉人狠话不多"]},
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: LGX","link":"链接: ","source":"来源: LGX","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'LGX',
+  title: '第一章 操作系统 操作系统引论',
+  postAI: '',
+  pageFillDescription: '第一章 操作系统引论, 1.1 操作系统的目标和作用, 1.1.1 操作系统的目标, 1.1.2 操作系统的作用, 1.1.3 推动操作系统发展的主要动力, 1.2 操作系统的发展过程, 1.2.1 未配置操作系统的计算机系统, 1.2.2 单道批处理系统, 1.2.3 多道批处理系统, 1.2.4 分时系统, 1.2.5 实时系统, 1.2.6 微机操作系统的发展, 作业, 例题一, 例题二, 1.3 操作系统的基本特征, 1.3.1 并发性, 1.3.2 共享性, 1.3.3 虚拟性, 1.3.4 异步性, 1.4 操作系统的主要功能, 1.4.1 处理机管理功能, 1.4.2 存储器管理功能, 1.4.3 设备管理功能, 1.4.4 文件管理功能, 1.4.5  操作系统与用户之间的接口, 1.4.6 现代操作系统的新功能, 1.5 OS结构设计, 1.5.1 传统的操作系统结构, 1.5.2 客户/服务器模式, 1.5.3 面向对象的程序设计技术(Object-Orientated Programming), 1.5.4 微内核OS结构第一章操作系统引论目的要求了解的引入和发展理解多道程序设计技术掌握操作系统的功能和特征操作系统的分类了解操作系统的结构设计重点与难点操作系统的功能和特征操作系统的分类操作系统的目标和作用操作系统的目标特点方便性有效性可扩充性开放性操作系统的作用作为用户与计算机硬件系统之间的接口是一个系统软件因而这种接口是软件接口用户通过三种方式使用计算机命令方式系统调用方式图形窗口方式作为计算机系统资源的管理者资源分为四类处理器存储器设备信息数据和程序的主要功能是对这四类资源进行管理处理机管理用于分配和控制处理机存储器管理主要负责内存的分配与回收设备管理负责设备的分配与操纵文件管理负责文件的存取共享和保护实现了对计算机资源的抽象推动操作系统发展的主要动力不断提高计算机资源利用率方便用户器件的不断更新换代主要元件四代字长内存外设外存光盘扫描仪等计算机体系结构的不断发展单处理机多处理机网络不断提出新的应用需求如实时多媒体功能嵌入式等操作系统的发展过程未配置操作系统的计算机系统人工操作方式缺点用户独占全机等待人工操作人工操作方式严重降低了计算机资源的利用率此即所谓的人机矛盾的速度在迅速提高而设备的速度却提高很慢使得与设备之间速度不匹配的矛盾更加突出脱机输入输出方式优点减少了的空闲时间提高了速度在脱机技术的基础上产生了单道批处理系统单道批处理系统单道批处理系统的处理过程作业指用户程序及其所需要的数据和命令的集合单道内存中始终只保持一道作业人们习惯上把按照这种形式顺序输入执行的一批作业称为作业流单道批处理系统的特征特征自动性无需用户干预顺序性一般情况下先进入内存的作业先完成单道性造成内存等资源浪费缺点多道批处理系统多道程序设计的基本概念两个概念多道程序设计指同时把几个作业放入内存并允许它们交替执行共享系统资源多道程序系统允许多个程序执行的操作系统优点提高的利用率可提高内存和设备利用率增加系统吞吐量特征多道性无序性调度性两级调度缺点平均周转时间长无交互能力周转时间是指从作业提交给系统开始到作业完成为止的这段时间间隔多道批处理系统需要解决的问题处理机管理问题内存管理问题设备管理问题文件管理问题作业管理问题用户与系统的接口问题操作系统定义操作系统是一组控制和管理计算机硬件和软件资源合理地对各类作业进行调度以及方便用户使用的程序的集合分时系统分时系统的产生人机交互共享主机分时系统的定义在一台主机上连接了多个配有显示器和键盘的终端并由此所组成的系统该系统允许多个用户同时通过自己的终端以交互方式使用计算机共享主机中的资源分时系统实现中的关键问题及时接收配置多路卡和缓冲区及时处理作业直接进入内存使用时间片轮转算法分时系统的特征多路性独立性及时性交互性实时系统实时系统的类型工业武器控制系统如炼钢化工生产的过程控制火炮自动控制飞机自动驾驶导弹制导等信息查询系统如飞机或火车订票系统多媒体系统嵌入式系统实时任务的类型按任务执行时是否呈现周期性来划分周期性实时任务非周期性实时任务开始截止时间任务在某时间以前必须开始执行完成截止时间任务在某时间以前必须完成根据对截止时间的要求来划分硬实时任务系统必须满足任务对截止时间的要求否则可能出现难以预测的结果软实时任务它也联系着一个截止时间但并不严格若偶尔错过了任务的截止时间对系统产生的影响也不会太大实时系统与分时系统特征的比较多路性分时服务多路采集独立性查询交互采集和控制及时性人控制对象交互性可靠性实时系统往往采取多级容错技术微机操作系统的发展单用户单任务操作系统和单用户多任务操作系统多用户多任务操作系统作业例题一设内存中有三道程序它们按的优先次序执行可抢占它们的计算和操作的时间如下表所示单位操作程序计算操作计算假设三道程序使用相同设备进行操作即程序以串行方式使用设备试画出单道运行和多道运行的时间关系图调度程序的执行时间忽略不计在两种情况下完成这三道程序要花多少时间例题二一个多道批处理系统中仅有和两个作业比晚到达它的计算和操作顺序如下单位操作程序计算操作计算若不考虑调度和切换时间则完成两个作业需要的时间最少是操作系统的基本特征并发性并行性指两个或多个事件在同一时刻发生并发性指两个或多个事件在同一时间间隔内发生共享性在操作系统环境下所谓共享是指系统中的资源可供内存中多个并发执行的进程线程共同使用由于资源属性的不同进程对资源共享的方式也不同目前主要有以下两种资源共享方式互斥共享方式我们把这种资源共享方式称为互斥式共享而把在一段时间内只允许一个进程访问的资源称为临界资源或独占资源同时访问方式并发和共享是操作系统的两个最基本的特征它们又是互为存在的条件资源共享是以程序进程的并发执行为条件的若系统不允许程序并发执行自然不存在资源共享问题若系统不能对资源共享实施有效管理协调好诸进程对共享资源的访问也必然影响到程序并发执行的程度甚至根本无法并发执行虚拟性操作系统中的所谓虚拟通过某种技术把一个物理实体变为若干个逻辑上的对应物时分复用技术即分时使用方式虚拟处理机技术虚拟设备技术空分复用技术虚拟磁盘技术分卷虚拟存储器技术请求调入和置换异步性操作系统的主要功能处理机管理功能进程控制主要功能如下作业创建进程撤消已结束的进程控制进程在运行过程中的状态转换进程同步进程互斥方式这是指诸进程线程在对临界资源进行访问时应采用互斥方式进程同步方式指在相互合作去完成共同任务的诸进程线程间由同步机构对它们的执行次序加以协调进程通信通常在它们之间是采用直接通信方式调度在传统的操作系统中包括作业调度和进程调度两步存储器管理功能内存分配采取静态和动态两种方式为了实现内存分配在内存分配的机制中应具有这样的结构和功能内存分配数据结构该结构用于记录内存空间的使用情况作为内存分配的依据内存分配功能系统按照一定的内存分配算法为用户程序分配内存空间内存回收功能系统对于用户不再需要的内存通过用户的释放请求去完成系统的回收功能内存保护地址映射内存扩充设备管理功能缓冲管理设备分配设备处理设备处理程序又称为设备驱动程序文件管理功能文件存储空间的管理目录管理文件的读写管理和保护文件的读写管理文件保护防止未经核准的用户存取文件防止冒名顶替存取文件防止以不正确的方式使用文件操作系统与用户之间的接口用户接口联机用户接口它由一组键盘操作命令及命令解释程序所组成脱机用户接口该接口是为批处理作业的用户提供的故也称为批处理用户接口该接口由一组作业控制语言组成图形用户接口程序接口该接口是为用户程序在执行中访问系统资源而设置的是用户程序取得操作系统服务的惟一途径它是由一组系统调用组成每一个系统调用都是一个能完成特定功能的子程序每当应用程序要求提供某种服务功能时便调用具有相应功能的系统调用现代操作系统的新功能系统安全认证技术这是一个用来确认被认证的对象是否名副其实的过程以确定对象的真实性防止入侵者进行假冒和篡改等密码技术即对系统中所需存储和传输的数据进行加密攻击者即使截获到数据也无法理解数据的内容访问控制技术两种途径通过对用户存取权限的设置限定用户只能访问被允许访问的资源这样也就限定了用户对系统资源的访问范围通过对文件属性的设置来保障指定文件的安全性如设置文件属性为只读时该文件就只能被读而不能被修改反病毒技术安装反病毒软件定期查杀病毒网络的功能和服务网络通信资源管理应用互操作支持多媒体网络通信资源管理应用互操作结构设计传统的操作系统结构无结构操作系统模块化结构模块化程序设计技术的基本概念模块独立性内聚性耦合度模块化接口法的优缺点提高了设计的正确性可理解性和可维护性增强了的可适应性加速了的开发过程分层式结构分层式结构的基本概念层次的设置客户服务器模式客户服务器模式的组成客户机服务器网络系统客户服务器之间的交互客户发送请求消息服务器接收消息服务器回送消息客户机接收消息客户服务器模式的优点实现数据的分布处理和存储用客户机进行本地处理和数据的分布存储便于集中管理重要数据和设备集中管理提高了系统的可靠性和安全性提高了系统的灵活性和可扩充性易于改编应用软件客户机程序面向对象的程序设计技术微内核结构微内核操作系统的基本概念足够小的内核基于客户服务器模式应用机制与策略分离原理采用面向对象技术微内核的基本功能进程线程管理低级存储器管理中断和陷入处理微内核操作系统的优点提高了系统的可扩展性增强了系统的可靠性可移植性强提供了对分布式系统的支持融入了面向对象技术微内核操作系统存在的问题运行效率有所降低',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-08-05 18:01:26',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://cdn.jsdelivr.net/gh/Nightliuguoxing/Pic@main/pics/avatar.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">LGX</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a><div id="he-plugin-simple"></div><script>var WIDGET = {
+  "CONFIG": {
+    "modules": "0124",
+    "background": "2",
+    "tmpColor": "FFFFFF",
+    "tmpSize": "16",
+    "cityColor": "FFFFFF",
+    "citySize": "16",
+    "aqiColor": "E8D87B",
+    "aqiSize": "16",
+    "weatherIconSize": "24",
+    "alertIconSize": "18",
+    "padding": "10px 10px 10px 10px",
+    "shadow": "0",
+    "language": "auto",
+    "borderRadius": "20",
+    "fixed": "true",
+    "vertical": "top",
+    "horizontal": "left",
+    "left": "20",
+    "top": "7.1",
+    "key": "df245676fb434a0691ead1c63341cd94"
+  }
+}
+</script><link rel="stylesheet" href="https://widget.qweather.net/simple/static/css/he-simple.css?v=1.4.0"/><script src="https://widget.qweather.net/simple/static/js/he-simple.js?v=1.4.0"></script></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AOP/" style="font-size: 1.05rem;">AOP<sup>1</sup></a><a href="/tags/Go%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/" style="font-size: 1.05rem;">Go基础教程<sup>5</sup></a><a href="/tags/Machine-Learning/" style="font-size: 1.05rem;">Machine Learning<sup>63</sup></a><a href="/tags/Matlab/" style="font-size: 1.05rem;">Matlab<sup>5</sup></a><a href="/tags/MongoDB/" style="font-size: 1.05rem;">MongoDB<sup>1</sup></a><a href="/tags/Python%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/" style="font-size: 1.05rem;">Python基础教程<sup>4</sup></a><a href="/tags/Redis/" style="font-size: 1.05rem;">Redis<sup>1</sup></a><a href="/tags/SpringCache/" style="font-size: 1.05rem;">SpringCache<sup>1</sup></a><a href="/tags/YOLO/" style="font-size: 1.05rem;">YOLO<sup>1</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">操作系统<sup>7</sup></a><a href="/tags/%E6%97%A5%E5%BF%97%E5%88%87%E9%9D%A2/" style="font-size: 1.05rem;">日志切面<sup>1</sup></a><a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 1.05rem;">深度学习<sup>1</sup></a><a href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/" style="font-size: 1.05rem;">目标检测<sup>1</sup></a><a href="/tags/%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/" style="font-size: 1.05rem;">系列教程<sup>5</sup></a><a href="/tags/%E7%BC%93%E5%AD%98%E6%B3%A8%E8%A7%A3/" style="font-size: 1.05rem;">缓存注解<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/08/"><span class="card-archive-list-date">八月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/07/"><span class="card-archive-list-date">七月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">81</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/05/"><span class="card-archive-list-date">五月 2021</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/04/"><span class="card-archive-list-date">四月 2021</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url">操作系统</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>操作系统</span></a></span></div></div><h1 class="post-title" itemprop="name headline">第一章 操作系统 操作系统引论</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2021-05-05T16:00:00.000Z" title="发表于 2021-05-06 00:00:00">2021-05-06</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2025-08-05T10:01:26.225Z" title="更新于 2025-08-05 18:01:26">2025-08-05</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为山东-济南"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>山东-济南</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src=""></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://liuguoxings.github.io/OS/OS01/"><header><a class="post-meta-categories" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url">操作系统</a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" tabindex="-1" itemprop="url">操作系统</a><h1 id="CrawlerTitle" itemprop="name headline">第一章 操作系统 操作系统引论</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">LGX</span><time itemprop="dateCreated datePublished" datetime="2021-05-05T16:00:00.000Z" title="发表于 2021-05-06 00:00:00">2021-05-06</time><time itemprop="dateCreated datePublished" datetime="2025-08-05T10:01:26.225Z" title="更新于 2025-08-05 18:01:26">2025-08-05</time></header><h2 id="第一章-操作系统引论">第一章 操作系统引论</h2>
+<ul>
+<li>
+<p>【目的要求】</p>
+<ol>
+<li>[了解]OS的引入和发展;</li>
+<li>[理解]多道程序设计技术;</li>
+<li>[掌握]操作系统的功能和特征、操作系统的分类;</li>
+<li>[了解]操作系统的结构设计.</li>
+</ol>
+</li>
+<li>
+<p>【重点与难点】</p>
+<ol>
+<li>操作系统的功能和特征;</li>
+<li>操作系统的分类.</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h2 id="1-1-操作系统的目标和作用">1.1 操作系统的目标和作用</h2>
+<h4 id="1-1-1-操作系统的目标">1.1.1 操作系统的目标</h4>
+<ul>
+<li>特点:
+<ul>
+<li>方便性</li>
+<li>有效性</li>
+<li>可扩充性</li>
+<li>开放性</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-1-2-操作系统的作用">1.1.2 操作系统的作用</h4>
+<ol>
+<li>
+<p>OS作为用户与计算机硬件系统之间的接口<br>
+<code>OS是一个系统软件, 因而这种接口是软件接口.</code></p>
+<ul>
+<li>用户通过三种方式使用计算机
+<ul>
+<li>命令方式</li>
+<li>系统调用方式</li>
+<li>图形、窗口方式</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>OS作为计算机系统资源的管理者</p>
+<ul>
+<li>
+<p>资源分为四类</p>
+<ul>
+<li>处理器</li>
+<li>存储器</li>
+<li>I/O设备</li>
+<li>信息(数据和程序)</li>
+</ul>
+</li>
+<li>
+<p>OS的主要功能是对这四类资源进行管理</p>
+<ul>
+<li>处理机管理，用于分配和控制处理机;</li>
+<li>存储器管理，主要负责内存的分配与回收;</li>
+<li>I/O设备管理，负责I/O设备的分配与操纵;</li>
+<li>文件管理，负责文件的存取、共享和保护.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>OS实现了对计算机资源的抽象</p>
+</li>
+</ol>
+<h4 id="1-1-3-推动操作系统发展的主要动力">1.1.3 推动操作系统发展的主要动力</h4>
+<ol>
+<li>不断提高计算机资源利用率</li>
+<li>方便用户</li>
+<li>器件的不断更新换代：主要元件(四代)、字长、内存、外设(外存、光盘、扫描仪等)</li>
+<li>计算机体系结构的不断发展：单处理机、多处理机、网络</li>
+<li>不断提出新的应用需求：如实时OS、多媒体功能、嵌入式OS等。</li>
+</ol>
+<h2 id="1-2-操作系统的发展过程">1.2 操作系统的发展过程</h2>
+<h4 id="1-2-1-未配置操作系统的计算机系统">1.2.1 未配置操作系统的计算机系统</h4>
+<ol>
+<li>
+<p>人工操作方式</p>
+<ul>
+<li>[缺点]:
+<ul>
+<li>用户独占全机</li>
+<li>CPU等待人工操作</li>
+</ul>
+</li>
+</ul>
+<p>人工操作方式严重降低了计算机资源的利用率，此即所谓的人机矛盾。CPU的速度在迅速提高，而I/O设备的速度却提高很慢，使得CPU与I/O设备之间速度不匹配的矛盾更加突出。</p>
+</li>
+<li>
+<p>脱机输入/输出(Off-Line I/O)方式</p>
+<ul>
+<li>[优点]
+<ul>
+<li>减少了CPU的空闲时间</li>
+<li>提高了I/O速度</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>在脱机I/O技术的基础上产生了单道批处理系统。</p>
+<h4 id="1-2-2-单道批处理系统">1.2.2 单道批处理系统</h4>
+<ol>
+<li>
+<p>单道批处理系统(Simple Batch Processing System)的处理过程<br>
+<code>作业</code>：指用户程序及其所需要的数据和命令的集合<br>
+<code>单道</code>：内存中始终只保持一道作业<br>
+人们习惯上把按照这种形式顺序输入、执行的一批作业称为<code>作业流</code></p>
+</li>
+<li>
+<p>单道批处理系统的特征</p>
+<ul>
+<li>[特征]
+<ul>
+<li>自动性：无需用户干预</li>
+<li>顺序性 ：一般情况下，先进入内存的作业先完成</li>
+<li>单道性：造成内存、CPU、I/O等资源浪费 [缺点]</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="1-2-3-多道批处理系统">1.2.3 多道批处理系统</h4>
+<ol>
+<li>
+<p>多道程序设计的基本概念</p>
+</li>
+<li>
+<p>两个概念</p>
+<ul>
+<li>多道程序设计: 指同时把几个作业放入内存,并允许它们交替执行,共享系统资源</li>
+<li>多道程序系统: 允许多个程序执行的操作系统</li>
+</ul>
+</li>
+<li>
+<p>[优点]</p>
+<ul>
+<li>提高CPU的利用率</li>
+<li>可提高内存和I/O设备利用率</li>
+<li>增加系统吞吐量: <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Nightliuguoxing/Pic@main/image/os/1619512129438-OS1233.jpg" alt="单道和多道程序运行情况"></li>
+</ul>
+</li>
+<li>
+<p>[特征]</p>
+<ul>
+<li>多道性</li>
+<li>无序性</li>
+<li>调度性: 两级调度</li>
+</ul>
+</li>
+<li>
+<p>[缺点]</p>
+<ul>
+<li>平均周转时间长</li>
+<li>无交互能力</li>
+<li><code>周转时间</code>：是指从作业提交给系统开始,到作业完成为止的这段时间间隔.</li>
+</ul>
+</li>
+<li>
+<p>多道批处理系统需要解决的问题</p>
+<ul>
+<li>处理机管理问题</li>
+<li>内存管理问题</li>
+<li>I/O设备管理问题</li>
+<li>文件管理问题</li>
+<li>作业管理问题</li>
+<li>用户与系统的接口问题</li>
+</ul>
+</li>
+</ol>
+<p><code>操作系统定义</code>: 操作系统是一组控制和管理计算机硬件和软件资源，合理地对各类作业进行调度，以及方便用户使用的程序的集合</p>
+<h4 id="1-2-4-分时系统">1.2.4 分时系统</h4>
+<ol>
+<li>
+<p>分时系统(Time-Sharing System)的产生:</p>
+<ul>
+<li>人-机交互</li>
+<li>共享主机</li>
+</ul>
+<p><code>分时系统的定义</code>: 在一台主机上连接了多个配有显示器和键盘的终端并由此所组成的系统，该系统允许多个用户同时通过自己的终端，以交互方式使用计算机，共享主机中的资源</p>
+</li>
+<li>
+<p>分时系统实现中的关键问题</p>
+<ul>
+<li>及时接收：配置多路卡和缓冲区。</li>
+<li>及时处理：作业直接进入内存；使用时间片轮转算法。</li>
+</ul>
+</li>
+<li>
+<p>分时系统的特征</p>
+<ul>
+<li>多路性</li>
+<li>独立性</li>
+<li>及时性</li>
+<li>交互性</li>
+</ul>
+</li>
+</ol>
+<h4 id="1-2-5-实时系统">1.2.5 实时系统</h4>
+<ol>
+<li>
+<p>实时系统的类型</p>
+<ul>
+<li>工业(武器)控制系统 如：炼钢、化工生产的过程控制，火炮自动控制、飞机自动驾驶、导弹制导等</li>
+<li>信息查询系统 如：飞机或火车订票系统</li>
+<li>多媒体系统</li>
+<li>嵌入式系统</li>
+</ul>
+</li>
+<li>
+<p>实时任务的类型</p>
+<ul>
+<li>
+<p>按任务执行时是否呈现周期性来划分</p>
+<ul>
+<li>
+<p>周期性实时任务。</p>
+</li>
+<li>
+<p>非周期性实时任务。</p>
+</li>
+<li>
+<p><code>开始截止时间——任务在某时间以前必须开始执行；</code></p>
+</li>
+<li>
+<p><code>完成截止时间——任务在某时间以前必须完成。</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>根据对截止时间的要求来划分</p>
+<ul>
+<li>硬实时任务(hard real-time task)。系统必须满足任务对截止时间的要求，否则可能出现难以预测的结果。</li>
+<li>软实时任务(Soft real-time task)。它也联系着一个截止时间，但并不严格，若偶尔错过了任务的截止时间， 对系统产生的影响也不会太大。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>实时系统与分时系统特征的比较</p>
+<ul>
+<li>多路性。分时服务；多路采集</li>
+<li>独立性。 查询交互；采集和控制</li>
+<li>及时性。 人；控制对象</li>
+<li>交互性。</li>
+<li>可靠性。实时系统往往采取多级容错技术</li>
+</ul>
+</li>
+</ol>
+<h4 id="1-2-6-微机操作系统的发展">1.2.6 微机操作系统的发展</h4>
+<ul>
+<li>单用户单任务操作系统: CP/M和MS-DOS</li>
+<li>单用户多任务操作系统: Windows</li>
+<li>多用户多任务操作系统: Unix OS</li>
+</ul>
+<h2 id="作业">作业</h2>
+<h4 id="例题一">例题一</h4>
+<hr>
+<p>设内存中有三道程序A、B、C，它们按A、B、C的优先次序执行（可抢占）。它们的计算和I/O操作的时间如下表所示（单位：ms）</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">操作 \ 程序</th>
+<th style="text-align:center">A</th>
+<th style="text-align:center">B</th>
+<th style="text-align:center">C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">计算</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">60</td>
+<td style="text-align:center">20</td>
+</tr>
+<tr>
+<td style="text-align:center">I/O操作</td>
+<td style="text-align:center">40</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">40</td>
+</tr>
+<tr>
+<td style="text-align:center">计算</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">20</td>
+</tr>
+</tbody>
+</table>
+<p>假设三道程序使用相同设备进行I/O操作，即程序以串行方式使用设备，试画出单道运行和多道运行的时间关系图（调度程序的执行时间忽略不计）。在两种情况下，完成这三道程序要花多少时间?</p>
+<hr>
+<h4 id="例题二">例题二</h4>
+<hr>
+<p>一个多道批处理系统中仅有P1和P2两个作业，P2比P1晚5ms到达，它的计算和I/O操作顺序如下（单位：ms）：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">操作 \ 程序</th>
+<th style="text-align:center">P1</th>
+<th style="text-align:center">P2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">计算</td>
+<td style="text-align:center">60</td>
+<td style="text-align:center">120</td>
+</tr>
+<tr>
+<td style="text-align:center">I/O操作</td>
+<td style="text-align:center">80</td>
+<td style="text-align:center">40</td>
+</tr>
+<tr>
+<td style="text-align:center">计算</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">40</td>
+</tr>
+</tbody>
+</table>
+<p>若不考虑调度和切换时间，则完成两个作业需要的时间最少是：</p>
+<p>A.240 ms	<br>
+B.260 ms	<br>
+C.340 ms	<br>
+D.360 ms</p>
+<hr>
+<h2 id="1-3-操作系统的基本特征">1.3 操作系统的基本特征</h2>
+<h4 id="1-3-1-并发性">1.3.1 并发性</h4>
+<p><code>并行性</code>: 指两个或多个事件在<code>同一时刻</code>发生<br>
+<code>并发性</code>: 指两个或多个事件在<code>同一时间</code> <code>间隔</code>内发生</p>
+<h4 id="1-3-2-共享性">1.3.2 共享性</h4>
+<p>在操作系统环境下，所谓共享是指系统中的资源可供内存中多个并发执行的进程(线程)共同使用。由于资源属性的不同，进程对资源共享的方式也不同，目前主要有以下两种资源共享方式:</p>
+<ul>
+<li>互斥共享方式: 我们把这种资源共享方式称为互斥式共享，而把在一段时间内只允许一个进程访问的资源称为临界资源或独占资源</li>
+<li>同时访问方式</li>
+</ul>
+<p><code>并发</code>和<code>共享</code>是操作系统的两个<code>最基本</code>的特征，它们又是<code>互为存在</code>的<code>条件</code></p>
+<ul>
+<li>资源共享是以程序（进程）的并发执行为条件的，若系统不允许程序并发执行，自然不存在资源共享问题</li>
+<li>若系统不能对资源共享实施有效管理，协调好诸进程对共享资源的访问，也必然影响到程序并发执行的程度，甚至根本无法并发执行</li>
+</ul>
+<h4 id="1-3-3-虚拟性">1.3.3 虚拟性</h4>
+<p>操作系统中的所谓&quot;虚拟&quot;: <code>通过某种技术把一个物理实体变为若干个逻辑上的对应物</code></p>
+<ul>
+<li>时分复用技术（即分时使用方式）
+<ul>
+<li>虚拟处理机技术</li>
+<li>虚拟设备技术</li>
+</ul>
+</li>
+<li>空分复用技术
+<ul>
+<li>虚拟磁盘技术：分卷</li>
+<li>虚拟存储器技术：请求调入和置换</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-3-4-异步性">1.3.4 异步性</h4>
+<h2 id="1-4-操作系统的主要功能">1.4 操作系统的主要功能</h2>
+<h4 id="1-4-1-处理机管理功能">1.4.1 处理机管理功能</h4>
+<ol>
+<li>
+<p>进程控制: 主要功能如下</p>
+<ul>
+<li>作业创建进程、撤消已结束的进程</li>
+<li>控制进程在运行过程中的状态转换</li>
+</ul>
+</li>
+<li>
+<p>进程同步</p>
+<ul>
+<li>进程互斥方式，这是指诸进程（线程）在对临界资源进行访问时，应采用互斥方式；</li>
+<li>进程同步方式，指在相互合作去完成共同任务的诸进程(线程)间，由同步机构对它们的执行次序加以协调</li>
+</ul>
+</li>
+<li>
+<p>进程通信: 通常在它们之间是采用<code>直接通信</code>方式</p>
+</li>
+<li>
+<p>调度: 在传统的操作系统中，包括<code>作业调度</code>和<code>进程调度</code>两步</p>
+</li>
+</ol>
+<h4 id="1-4-2-存储器管理功能">1.4.2 存储器管理功能</h4>
+<ol>
+<li>
+<p>内存分配: 采取<code>静态</code>和<code>动态</code>两种方式</p>
+<ul>
+<li>为了实现内存分配，在内存分配的机制中应具有这样的结构和功能：
+<ul>
+<li>内存分配数据结构，该结构用于记录内存空间的使用情况，作为内存分配的依据；</li>
+<li>内存分配功能，系统按照一定的内存分配算法， 为用户程序分配内存空间；</li>
+<li>内存回收功能，系统对于用户不再需要的内存，通过用户的释放请求，去完成系统的回收功能。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>内存保护</p>
+</li>
+<li>
+<p>地址映射</p>
+</li>
+<li>
+<p>内存扩充</p>
+</li>
+</ol>
+<h4 id="1-4-3-设备管理功能">1.4.3 设备管理功能</h4>
+<ol>
+<li>缓冲管理</li>
+<li>设备分配</li>
+<li>设备处理: 设备处理程序又称为设备驱动程序</li>
+</ol>
+<h4 id="1-4-4-文件管理功能">1.4.4 文件管理功能</h4>
+<ol>
+<li>文件存储空间的管理</li>
+<li>目录管理</li>
+<li>文件的读/写管理和保护
+<ul>
+<li>文件的读/写管理</li>
+<li>文件保护
+<ul>
+<li>防止未经核准的用户存取文件；</li>
+<li>防止冒名顶替存取文件；</li>
+<li>防止以不正确的方式使用文件。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="1-4-5-操作系统与用户之间的接口">1.4.5  操作系统与用户之间的接口</h4>
+<ol>
+<li>
+<p>用户接口</p>
+<ul>
+<li>联机用户接口: 它由一组键盘操作<code>命令及命令解释程序</code>所组成</li>
+<li>脱机用户接口: 该接口是为批处理作业的用户提供的，故也称为<code>批处理用户接口</code>;该接口由一组作业控制语言JCL组成</li>
+<li>图形用户接口</li>
+</ul>
+</li>
+<li>
+<p>程序接口: 该接口是为用户程序在执行中访问系统资源而设置的，<code>是用户程序取得操作系统服务的惟一途径</code>;它是由一组系统调用组成，每一个系统调用都是一个能完成特定功能的子程序，每当应用程序要求OS提供某种服务(功能)时，便调用具有相应功能的<code>系统调用</code></p>
+</li>
+</ol>
+<h4 id="1-4-6-现代操作系统的新功能">1.4.6 现代操作系统的新功能</h4>
+<ol>
+<li>
+<p>系统安全</p>
+<ul>
+<li>认证技术。这是一个用来确认被认证的对象是否名副其实的过程，以确定对象的真实性，防止入侵者进行假冒和篡改等。</li>
+<li>密码技术。即对系统中所需存储和传输的数据进行加密，攻击者即使截获到数据，也无法理解数据的内容。</li>
+<li>访问控制技术: 两种途径
+<ul>
+<li>通过对用户存取权限的设置，限定用户只能访问被允许访问的资源，这样也就限定了用户对系统资源的访问范围</li>
+<li>通过对文件属性的设置来保障指定文件的安全性，如设置文件属性为只读时，该文件就只能被读而不能被修改</li>
+</ul>
+</li>
+<li>反病毒技术。安装反病毒软件，定期查杀病毒。</li>
+</ul>
+</li>
+<li>
+<p>网络的功能和服务</p>
+<ul>
+<li>网络通信</li>
+<li>资源管理</li>
+<li>应用互操作</li>
+</ul>
+</li>
+<li>
+<p>支持多媒体</p>
+<ul>
+<li>网络通信</li>
+<li>资源管理</li>
+<li>应用互操作</li>
+</ul>
+</li>
+</ol>
+<h2 id="1-5-OS结构设计">1.5 OS结构设计</h2>
+<h4 id="1-5-1-传统的操作系统结构">1.5.1 传统的操作系统结构</h4>
+<ol>
+<li>无结构操作系统</li>
+<li>模块化结构OS
+<ul>
+<li>模块化程序设计技术的基本概念
+<ul>
+<li><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Nightliuguoxing/Pic@main/image/os/1619512463297-OS1512.jpg" alt="模块化操作系统结构"></li>
+</ul>
+</li>
+<li>模块独立性
+<ul>
+<li>内聚性</li>
+<li>耦合度</li>
+<li>模块化接口法的优缺点
+<ul>
+<li>提高了OS设计的正确性、可理解性和可维护性</li>
+<li>增强了OS的可适应性</li>
+<li>加速了OS的开发过程</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>分层式结构OS
+<ul>
+<li>分层式结构的基本概念</li>
+<li>层次的设置</li>
+</ul>
+</li>
+</ol>
+<h4 id="1-5-2-客户-服务器模式">1.5.2 客户/服务器模式</h4>
+<ol>
+<li>
+<p>客户/服务器模式(Client-Server Model)的组成</p>
+<ul>
+<li>客户机</li>
+<li>服务器</li>
+<li>网络系统</li>
+</ul>
+</li>
+<li>
+<p>客户/服务器之间的交互</p>
+<ul>
+<li>客户发送请求消息</li>
+<li>服务器接收消息</li>
+<li>服务器回送消息</li>
+<li>客户机接收消息</li>
+</ul>
+</li>
+<li>
+<p>客户/服务器模式的优点</p>
+<ul>
+<li>实现数据的分布处理和存储（用客户机进行本地处理和数据的分布存储）</li>
+<li>便于集中管理。重要数据和设备集中管理，提高了系统的可靠性和安全性</li>
+<li>提高了系统的灵活性和可扩充性</li>
+<li>易于改编应用软件（客户机程序）</li>
+</ul>
+</li>
+</ol>
+<h4 id="1-5-3-面向对象的程序设计技术-Object-Orientated-Programming">1.5.3 面向对象的程序设计技术(Object-Orientated Programming)</h4>
+<h4 id="1-5-4-微内核OS结构">1.5.4 微内核OS结构</h4>
+<ol>
+<li>
+<p>微内核操作系统的基本概念</p>
+<ul>
+<li>足够小的内核</li>
+<li>基于客户/服务器模式</li>
+<li>应用&quot;机制与策略分离&quot;原理</li>
+<li>采用面向对象技术</li>
+</ul>
+</li>
+<li>
+<p>微内核的基本功能</p>
+<ul>
+<li>进程（线程）管理。</li>
+<li>低级存储器管理。</li>
+<li>中断和陷入处理。</li>
+</ul>
+</li>
+<li>
+<p>微内核操作系统的优点</p>
+<ul>
+<li>提高了系统的可扩展性</li>
+<li>增强了系统的可靠性</li>
+<li>可移植性强</li>
+<li>提供了对分布式系统的支持</li>
+<li>融入了面向对象技术</li>
+</ul>
+</li>
+<li>
+<p>微内核操作系统存在的问题: 运行效率有所降低</p>
+</li>
+</ol>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Nightliuguoxing/Pic@main/pics/avatar.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Nightliuguoxing/Pic@main/pics/avatar.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">LGX</div><div class="post-copyright__author_desc"></div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://liuguoxings.github.io/OS/OS01/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://liuguoxings.github.io/OS/OS01/')">第一章 操作系统 操作系统引论</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://liuguoxings.github.io/OS/OS01/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=第一章 操作系统 操作系统引论&amp;url=https://liuguoxings.github.io/OS/OS01/&amp;pic=" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://liuguoxings.github.io" target="_blank">LGX</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>操作系统<span class="tagsPageCount">7</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://raw.githubusercontent.com/liuguoxings/Pic/main/pics/20250805153725905.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/OS/OS00/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">操作系统 学习大纲</div></div></a></div><div class="next-post pull-right"><a href="/OS/OS02/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">第二章 操作系统 进程的描述与控制</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/OS/OS00/" title="操作系统 学习大纲"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2021-05-03</div><div class="title">操作系统 学习大纲</div></div></a></div><div><a href="/OS/OS03/" title="第三章 操作系统 处理机调度与死锁"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2021-05-12</div><div class="title">第三章 操作系统 处理机调度与死锁</div></div></a></div><div><a href="/OS/OS02/" title="第二章 操作系统 进程的描述与控制"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2021-05-09</div><div class="title">第二章 操作系统 进程的描述与控制</div></div></a></div><div><a href="/OS/OS04/" title="第四章 操作系统 存储器管理"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2021-05-15</div><div class="title">第四章 操作系统 存储器管理</div></div></a></div><div><a href="/OS/OP/OSOP2/" title="操作系统 实验 - OP2"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2021-05-12</div><div class="title">操作系统 实验 - OP2</div></div></a></div><div><a href="/OS/OP/OSOP1/" title="操作系统 实验 - OP1"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2021-04-28</div><div class="title">操作系统 实验 - OP1</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Nightliuguoxing/Pic@main/pics/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/08/24/64e6ce9c507bb.png" alt="status"/></div></div><div class="author-info__description">非淡泊无以明志，非宁静无以致远。</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">LGX</h1><div class="author-info__desc"></div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/liuguoxings" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%BC%95%E8%AE%BA"><span class="toc-number">1.</span> <span class="toc-text">第一章 操作系统引论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%9B%AE%E6%A0%87%E5%92%8C%E4%BD%9C%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">1.1 操作系统的目标和作用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-1-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%9B%AE%E6%A0%87"><span class="toc-number">2.0.1.</span> <span class="toc-text">1.1.1 操作系统的目标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-2-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">2.0.2.</span> <span class="toc-text">1.1.2 操作系统的作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-3-%E6%8E%A8%E5%8A%A8%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8F%91%E5%B1%95%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8A%A8%E5%8A%9B"><span class="toc-number">2.0.3.</span> <span class="toc-text">1.1.3 推动操作系统发展的主要动力</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%8F%91%E5%B1%95%E8%BF%87%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">1.2 操作系统的发展过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-1-%E6%9C%AA%E9%85%8D%E7%BD%AE%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.0.1.</span> <span class="toc-text">1.2.1 未配置操作系统的计算机系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-2-%E5%8D%95%E9%81%93%E6%89%B9%E5%A4%84%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.0.2.</span> <span class="toc-text">1.2.2 单道批处理系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-3-%E5%A4%9A%E9%81%93%E6%89%B9%E5%A4%84%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.0.3.</span> <span class="toc-text">1.2.3 多道批处理系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-4-%E5%88%86%E6%97%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.0.4.</span> <span class="toc-text">1.2.4 分时系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-5-%E5%AE%9E%E6%97%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.0.5.</span> <span class="toc-text">1.2.5 实时系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-6-%E5%BE%AE%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%8F%91%E5%B1%95"><span class="toc-number">3.0.6.</span> <span class="toc-text">1.2.6 微机操作系统的发展</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E4%B8%9A"><span class="toc-number">4.</span> <span class="toc-text">作业</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98%E4%B8%80"><span class="toc-number">4.0.1.</span> <span class="toc-text">例题一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98%E4%BA%8C"><span class="toc-number">4.0.2.</span> <span class="toc-text">例题二</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%89%B9%E5%BE%81"><span class="toc-number">5.</span> <span class="toc-text">1.3 操作系统的基本特征</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-1-%E5%B9%B6%E5%8F%91%E6%80%A7"><span class="toc-number">5.0.1.</span> <span class="toc-text">1.3.1 并发性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-2-%E5%85%B1%E4%BA%AB%E6%80%A7"><span class="toc-number">5.0.2.</span> <span class="toc-text">1.3.2 共享性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-3-%E8%99%9A%E6%8B%9F%E6%80%A7"><span class="toc-number">5.0.3.</span> <span class="toc-text">1.3.3 虚拟性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-4-%E5%BC%82%E6%AD%A5%E6%80%A7"><span class="toc-number">5.0.4.</span> <span class="toc-text">1.3.4 异步性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD"><span class="toc-number">6.</span> <span class="toc-text">1.4 操作系统的主要功能</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-1-%E5%A4%84%E7%90%86%E6%9C%BA%E7%AE%A1%E7%90%86%E5%8A%9F%E8%83%BD"><span class="toc-number">6.0.1.</span> <span class="toc-text">1.4.1 处理机管理功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-2-%E5%AD%98%E5%82%A8%E5%99%A8%E7%AE%A1%E7%90%86%E5%8A%9F%E8%83%BD"><span class="toc-number">6.0.2.</span> <span class="toc-text">1.4.2 存储器管理功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-3-%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%8A%9F%E8%83%BD"><span class="toc-number">6.0.3.</span> <span class="toc-text">1.4.3 设备管理功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-4-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%8A%9F%E8%83%BD"><span class="toc-number">6.0.4.</span> <span class="toc-text">1.4.4 文件管理功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-5-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%8E%E7%94%A8%E6%88%B7%E4%B9%8B%E9%97%B4%E7%9A%84%E6%8E%A5%E5%8F%A3"><span class="toc-number">6.0.5.</span> <span class="toc-text">1.4.5  操作系统与用户之间的接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-6-%E7%8E%B0%E4%BB%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%96%B0%E5%8A%9F%E8%83%BD"><span class="toc-number">6.0.6.</span> <span class="toc-text">1.4.6 现代操作系统的新功能</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-OS%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">7.</span> <span class="toc-text">1.5 OS结构设计</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-1-%E4%BC%A0%E7%BB%9F%E7%9A%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84"><span class="toc-number">7.0.1.</span> <span class="toc-text">1.5.1 传统的操作系统结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-2-%E5%AE%A2%E6%88%B7-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="toc-number">7.0.2.</span> <span class="toc-text">1.5.2 客户&#x2F;服务器模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-3-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%8A%80%E6%9C%AF-Object-Orientated-Programming"><span class="toc-number">7.0.3.</span> <span class="toc-text">1.5.3 面向对象的程序设计技术(Object-Orientated Programming)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-4-%E5%BE%AE%E5%86%85%E6%A0%B8OS%E7%BB%93%E6%9E%84"><span class="toc-number">7.0.4.</span> <span class="toc-text">1.5.4 微内核OS结构</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Matlab/M06/" title="M06 - 灰色关联分析 &amp; 灰色预测模型"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://raw.githubusercontent.com/liuguoxings/Pic/main/pics/20250805153725905.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="M06 - 灰色关联分析 &amp; 灰色预测模型"/></a><div class="content"><a class="title" href="/Matlab/M06/" title="M06 - 灰色关联分析 &amp; 灰色预测模型">M06 - 灰色关联分析 &amp; 灰色预测模型</a><time datetime="2022-08-03T16:00:00.000Z" title="发表于 2022-08-04 00:00:00">2022-08-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/YOLO/Y001/" title="Y001 第一章 深度学习经典检测方法概述"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://raw.githubusercontent.com/liuguoxings/Pic/main/pics/20250805153951001.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Y001 第一章 深度学习经典检测方法概述"/></a><div class="content"><a class="title" href="/YOLO/Y001/" title="Y001 第一章 深度学习经典检测方法概述">Y001 第一章 深度学习经典检测方法概述</a><time datetime="2022-08-02T16:00:00.000Z" title="发表于 2022-08-03 00:00:00">2022-08-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/JAVA/J04/" title="J04 - MongoDB的使用"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://raw.githubusercontent.com/liuguoxings/Pic/main/pics/20250805153036862.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="J04 - MongoDB的使用"/></a><div class="content"><a class="title" href="/JAVA/J04/" title="J04 - MongoDB的使用">J04 - MongoDB的使用</a><time datetime="2022-07-21T16:00:00.000Z" title="发表于 2022-07-22 00:00:00">2022-07-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/JAVA/J03/" title="J03 - Redis的使用"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://raw.githubusercontent.com/liuguoxings/Pic/main/pics/20250805153036862.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="J03 - Redis的使用"/></a><div class="content"><a class="title" href="/JAVA/J03/" title="J03 - Redis的使用">J03 - Redis的使用</a><time datetime="2022-07-20T16:00:00.000Z" title="发表于 2022-07-21 00:00:00">2022-07-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/JAVA/J02/" title="J02 - SpringCache的使用"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://raw.githubusercontent.com/liuguoxings/Pic/main/pics/20250805153036862.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="J02 - SpringCache的使用"/></a><div class="content"><a class="title" href="/JAVA/J02/" title="J02 - SpringCache的使用">J02 - SpringCache的使用</a><time datetime="2022-07-18T16:00:00.000Z" title="发表于 2022-07-19 00:00:00">2022-07-19</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2025 By <a class="footer-bar-link" href="/" title="LGX" target="_blank">LGX</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">90</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">7</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://liuguoxings.github.io/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AOP/" style="font-size: 0.88rem;">AOP<sup>1</sup></a><a href="/tags/Go%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/" style="font-size: 0.88rem;">Go基础教程<sup>5</sup></a><a href="/tags/Machine-Learning/" style="font-size: 0.88rem;">Machine Learning<sup>63</sup></a><a href="/tags/Matlab/" style="font-size: 0.88rem;">Matlab<sup>5</sup></a><a href="/tags/MongoDB/" style="font-size: 0.88rem;">MongoDB<sup>1</sup></a><a href="/tags/Python%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/" style="font-size: 0.88rem;">Python基础教程<sup>4</sup></a><a href="/tags/Redis/" style="font-size: 0.88rem;">Redis<sup>1</sup></a><a href="/tags/SpringCache/" style="font-size: 0.88rem;">SpringCache<sup>1</sup></a><a href="/tags/YOLO/" style="font-size: 0.88rem;">YOLO<sup>1</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 0.88rem;">操作系统<sup>7</sup></a><a href="/tags/%E6%97%A5%E5%BF%97%E5%88%87%E9%9D%A2/" style="font-size: 0.88rem;">日志切面<sup>1</sup></a><a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 0.88rem;">深度学习<sup>1</sup></a><a href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/" style="font-size: 0.88rem;">目标检测<sup>1</sup></a><a href="/tags/%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/" style="font-size: 0.88rem;">系列教程<sup>5</sup></a><a href="/tags/%E7%BC%93%E5%AD%98%E6%B3%A8%E8%A7%A3/" style="font-size: 0.88rem;">缓存注解<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("04/01/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.6.14",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 LGX 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
