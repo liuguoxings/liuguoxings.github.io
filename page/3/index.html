@@ -60,7 +60,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2025-08-08 10:37:15',
+  postUpdate: '2025-08-08 15:50:43',
   postMainColor: '',
 }</script><noscript><style type="text/css">
   #nav {
@@ -234,27 +234,15 @@ if (true) {
       </a>
     </div>
     
-    <div class="catalog-list-item" id="/categories/操作系统/">
-      <a href="/categories/操作系统/">
-        操作系统
-      </a>
-    </div>
-    
-    <div class="catalog-list-item" id="/categories/Go语言/">
-      <a href="/categories/Go语言/">
-        Go语言
-      </a>
-    </div>
-    
     <div class="catalog-list-item" id="/categories/SpringBoot-实战/">
       <a href="/categories/SpringBoot-实战/">
         SpringBoot 实战
       </a>
     </div>
     
-    <div class="catalog-list-item" id="/categories/Python语言/">
-      <a href="/categories/Python语言/">
-        Python语言
+    <div class="catalog-list-item" id="/categories/Go语言/">
+      <a href="/categories/Go语言/">
+        Go语言
       </a>
     </div>
     
@@ -270,9 +258,21 @@ if (true) {
       </a>
     </div>
     
+    <div class="catalog-list-item" id="/categories/操作系统/">
+      <a href="/categories/操作系统/">
+        操作系统
+      </a>
+    </div>
+    
     <div class="catalog-list-item" id="/categories/深度学习/">
       <a href="/categories/深度学习/">
         深度学习
+      </a>
+    </div>
+    
+    <div class="catalog-list-item" id="/categories/Python语言/">
+      <a href="/categories/Python语言/">
+        Python语言
       </a>
     </div>
     
@@ -281,45 +281,28 @@ if (true) {
         数据结构
       </a>
     </div>
-    </div><div class="category-bar-next" id="category-bar-next" onclick="anzhiyu.scrollCategoryBarToRight()"><i class="anzhiyufont anzhiyu-icon-angle-double-right"></i></div><a class="catalog-more" href="/categories/">更多</a></div></div></div><div class="recent-post-item lastestpost-item" onclick="pjax.loadUrl('/ML/ML24/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">Machine Learning</div><a class="unvisited-post" href="/ML/ML24/" title="ML24 - Logistic Regression Simplified cost function and gradient decent">未读</a></div><a class="article-title" href="/ML/ML24/" title="ML24 - Logistic Regression Simplified cost function and gradient decent">ML24 - Logistic Regression Simplified cost function and gradient decent</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-14T16:00:00.000Z" title="发表于 2022-07-15 00:00:00" time="2022-07-15 00:00:00">2022-07-15</time><time class="time_hidden" datetime="2025-08-05T05:30:51.045Z" title="更新于 2025-08-05 13:30:51" time="2025-08-05 13:30:51">2025-08-05</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Machine-Learning/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Machine Learning</span></a></span></div><div class="content">ML24 - Logistic Regression Simplified cost function and gradient decent
-简化代价函数与梯度下降
-Logistic Regression cost function
-$ J(\theta) = \frac{1}{m} \displaystyle\sum_{i=1}^m Cost(h_{\theta}(x^{(i)}), \ y^{(i)}) $
-$ Cost(h_\theta(x), \ y) =
-\begin{cases}
-\quad \ \ -log(h_\theta(x)) \quad if \ y \ = \ 1 \
--log(1 - h_\theta(x)) \quad if \ y \ = \ 0
-\end{cases}
-$
-Note: y = 0 or 1 always
-
-$ Cost(h_\theta(x), \ y) =
-\begin{cases}
-\quad \ \ -log(h_\theta(x)) \quad if \ y \ = \ 1 \
--log(1 - h_\theta(x)) \qu ...</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/ML/ML25/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">Machine Learning</div><a class="unvisited-post" href="/ML/ML25/" title="ML25 - Logistic Regression Advanced optimization">未读</a></div><a class="article-title" href="/ML/ML25/" title="ML25 - Logistic Regression Advanced optimization">ML25 - Logistic Regression Advanced optimization</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-14T16:00:00.000Z" title="发表于 2022-07-15 00:00:00" time="2022-07-15 00:00:00">2022-07-15</time><time class="time_hidden" datetime="2025-08-05T05:30:50.149Z" title="更新于 2025-08-05 13:30:50" time="2025-08-05 13:30:50">2025-08-05</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Machine-Learning/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Machine Learning</span></a></span></div><div class="content">ML25 - Logistic Regression Advanced optimization
-高级优化
-Optimization algorithm
-Cost function J(θ)J(\theta)J(θ). Want min⁡θJ(θ)\displaystyle\min_\theta J(\theta)θmin​J(θ).
-Given θ\thetaθ, we have code that can compute
-$ \quad \quad - \ J(\theta)$
-$ \quad \quad - \ \frac{\partial}{\partial\theta_j} J(\theta) \quad (for \ j \ = \ 1, \ 2, \ \cdots, \ n)$
-Optimization algorithms:
-
-Gradient descent
-Conjugate gradient (共轭梯度法)
-BFGS
-L-BFGS
-
-Advantages:
-
-No need to manually pick α\alphaα.
-Often faster than  ...</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/ML/ML26/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">Machine Learning</div><a class="unvisited-post" href="/ML/ML26/" title="ML26 - Logistic Regression Multi-class classification： One-vs-all">未读</a></div><a class="article-title" href="/ML/ML26/" title="ML26 - Logistic Regression Multi-class classification： One-vs-all">ML26 - Logistic Regression Multi-class classification： One-vs-all</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-14T16:00:00.000Z" title="发表于 2022-07-15 00:00:00" time="2022-07-15 00:00:00">2022-07-15</time><time class="time_hidden" datetime="2025-08-05T05:30:49.238Z" title="更新于 2025-08-05 13:30:49" time="2025-08-05 13:30:49">2025-08-05</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Machine-Learning/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Machine Learning</span></a></span></div><div class="content">ML26 - Logistic Regression Multi-class classification: One-vs-all
+    </div><div class="category-bar-next" id="category-bar-next" onclick="anzhiyu.scrollCategoryBarToRight()"><i class="anzhiyufont anzhiyu-icon-angle-double-right"></i></div><a class="catalog-more" href="/categories/">更多</a></div></div></div><div class="recent-post-item lastestpost-item" onclick="pjax.loadUrl('/ML/ML26/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">Machine Learning</div><a class="unvisited-post" href="/ML/ML26/" title="ML26 - Logistic Regression Multi-class classification： One-vs-all">未读</a></div><a class="article-title" href="/ML/ML26/" title="ML26 - Logistic Regression Multi-class classification： One-vs-all">ML26 - Logistic Regression Multi-class classification： One-vs-all</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-14T16:00:00.000Z" title="发表于 2022-07-15 00:00:00" time="2022-07-15 00:00:00">2022-07-15</time><time class="time_hidden" datetime="2025-08-05T05:30:49.238Z" title="更新于 2025-08-05 13:30:49" time="2025-08-05 13:30:49">2025-08-05</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Machine-Learning/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Machine Learning</span></a></span></div><div class="content">ML26 - Logistic Regression Multi-class classification: One-vs-all
 多元分类
 One-vs-all
 Train a logistic regression classifier hθ(i)(x)h_\theta^{(i)}(x)hθ(i)​(x) for each class iii to predict the probability that y = i.
 One a new input xxx, to make a prediction, pick the class iii that maximizes
 $ \quad \quad \displaystyle\max_i h_\theta^{(i)}(x) $
-</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/ML/ML27/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">Machine Learning</div><a class="unvisited-post" href="/ML/ML27/" title="ML27 - Regularization - The problem of overfitting">未读</a></div><a class="article-title" href="/ML/ML27/" title="ML27 - Regularization - The problem of overfitting">ML27 - Regularization - The problem of overfitting</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-14T16:00:00.000Z" title="发表于 2022-07-15 00:00:00" time="2022-07-15 00:00:00">2022-07-15</time><time class="time_hidden" datetime="2025-08-05T05:30:48.333Z" title="更新于 2025-08-05 13:30:48" time="2025-08-05 13:30:48">2025-08-05</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Machine-Learning/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Machine Learning</span></a></span></div><div class="content">ML27 - Regularization - The problem of overfitting
+</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/ML/ML23/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">Machine Learning</div><a class="unvisited-post" href="/ML/ML23/" title="ML23 - Logistic Regression Cost Function">未读</a></div><a class="article-title" href="/ML/ML23/" title="ML23 - Logistic Regression Cost Function">ML23 - Logistic Regression Cost Function</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-14T16:00:00.000Z" title="发表于 2022-07-15 00:00:00" time="2022-07-15 00:00:00">2022-07-15</time><time class="time_hidden" datetime="2025-08-05T05:30:51.777Z" title="更新于 2025-08-05 13:30:51" time="2025-08-05 13:30:51">2025-08-05</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Machine-Learning/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Machine Learning</span></a></span></div><div class="content">ML23 - Logistic Regression Cost Function
+代价函数
+Training set : $ { (x^{(1)},y^{(1)}), \ (x^{(2)},y^{(2)}), \ \cdots, \ (x^{(m)},y^{(m)}) } $
+m examples $ \quad x \in
+\begin{bmatrix}
+{x_0}\
+{x_1}\
+{\vdots}\
+{x_n}\
+\end{bmatrix} \quad
+x_0 \ = \ 1, \ y \in {0, 1} $
+$ h_\theta (x) \ = \ \frac{1}{1+e^{-\theta^Tx}} $
+How to choose parameters θ\thetaθ ?
+Cost Function
+Linear regression: $$ J(\theta) = \frac{1}{m} \displaystyle\sum_{i=1}^m cost(h_{\theta}(x^{(i)}), \ y^{(i)})  $$
+$ cost(h_{\theta}(x^{(i)}) ...</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/ML/ML27/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">Machine Learning</div><a class="unvisited-post" href="/ML/ML27/" title="ML27 - Regularization - The problem of overfitting">未读</a></div><a class="article-title" href="/ML/ML27/" title="ML27 - Regularization - The problem of overfitting">ML27 - Regularization - The problem of overfitting</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-14T16:00:00.000Z" title="发表于 2022-07-15 00:00:00" time="2022-07-15 00:00:00">2022-07-15</time><time class="time_hidden" datetime="2025-08-05T05:30:48.333Z" title="更新于 2025-08-05 13:30:48" time="2025-08-05 13:30:48">2025-08-05</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Machine-Learning/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Machine Learning</span></a></span></div><div class="content">ML27 - Regularization - The problem of overfitting
 过拟合问题
 Addressing overfitting:
 Options:
@@ -337,7 +320,24 @@ Works well when we have a lot of features, each of which contributes a bit to pr
 
 
 
-</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/ML/ML28/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">Machine Learning</div><a class="unvisited-post" href="/ML/ML28/" title="ML28 - Regularization - Cost function">未读</a></div><a class="article-title" href="/ML/ML28/" title="ML28 - Regularization - Cost function">ML28 - Regularization - Cost function</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-14T16:00:00.000Z" title="发表于 2022-07-15 00:00:00" time="2022-07-15 00:00:00">2022-07-15</time><time class="time_hidden" datetime="2025-08-05T05:30:47.356Z" title="更新于 2025-08-05 13:30:47" time="2025-08-05 13:30:47">2025-08-05</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Machine-Learning/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Machine Learning</span></a></span></div><div class="content">ML28 - Regularization - Cost function
+</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/ML/ML25/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">Machine Learning</div><a class="unvisited-post" href="/ML/ML25/" title="ML25 - Logistic Regression Advanced optimization">未读</a></div><a class="article-title" href="/ML/ML25/" title="ML25 - Logistic Regression Advanced optimization">ML25 - Logistic Regression Advanced optimization</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-14T16:00:00.000Z" title="发表于 2022-07-15 00:00:00" time="2022-07-15 00:00:00">2022-07-15</time><time class="time_hidden" datetime="2025-08-05T05:30:50.149Z" title="更新于 2025-08-05 13:30:50" time="2025-08-05 13:30:50">2025-08-05</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Machine-Learning/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Machine Learning</span></a></span></div><div class="content">ML25 - Logistic Regression Advanced optimization
+高级优化
+Optimization algorithm
+Cost function J(θ)J(\theta)J(θ). Want min⁡θJ(θ)\displaystyle\min_\theta J(\theta)θmin​J(θ).
+Given θ\thetaθ, we have code that can compute
+$ \quad \quad - \ J(\theta)$
+$ \quad \quad - \ \frac{\partial}{\partial\theta_j} J(\theta) \quad (for \ j \ = \ 1, \ 2, \ \cdots, \ n)$
+Optimization algorithms:
+
+Gradient descent
+Conjugate gradient (共轭梯度法)
+BFGS
+L-BFGS
+
+Advantages:
+
+No need to manually pick α\alphaα.
+Often faster than  ...</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/ML/ML28/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">Machine Learning</div><a class="unvisited-post" href="/ML/ML28/" title="ML28 - Regularization - Cost function">未读</a></div><a class="article-title" href="/ML/ML28/" title="ML28 - Regularization - Cost function">ML28 - Regularization - Cost function</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-14T16:00:00.000Z" title="发表于 2022-07-15 00:00:00" time="2022-07-15 00:00:00">2022-07-15</time><time class="time_hidden" datetime="2025-08-05T05:30:47.356Z" title="更新于 2025-08-05 13:30:47" time="2025-08-05 13:30:47">2025-08-05</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Machine-Learning/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Machine Learning</span></a></span></div><div class="content">ML28 - Regularization - Cost function
 代价函数
 Regularization.
 Small value for parameters $ \theta_0, \ \theta_1, \ \cdots, \ \theta_n $
@@ -363,13 +363,6 @@ $$
 逻辑回归的正则化
 </div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/ML/ML31/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">Machine Learning</div><a class="unvisited-post" href="/ML/ML31/" title="ML31 - Neural Networks： Representation - Non-linear hypotheses">未读</a></div><a class="article-title" href="/ML/ML31/" title="ML31 - Neural Networks： Representation - Non-linear hypotheses">ML31 - Neural Networks： Representation - Non-linear hypotheses</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-14T16:00:00.000Z" title="发表于 2022-07-15 00:00:00" time="2022-07-15 00:00:00">2022-07-15</time><time class="time_hidden" datetime="2025-08-05T05:30:42.167Z" title="更新于 2025-08-05 13:30:42" time="2025-08-05 13:30:42">2025-08-05</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Machine-Learning/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Machine Learning</span></a></span></div><div class="content">ML31 - Neural Networks: Representation - Non-linear hypotheses
 非线性假设
-</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/ML/ML32/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">Machine Learning</div><a class="unvisited-post" href="/ML/ML32/" title="ML32 - Neural Networks： Representation - Neurons and the brain">未读</a></div><a class="article-title" href="/ML/ML32/" title="ML32 - Neural Networks： Representation - Neurons and the brain">ML32 - Neural Networks： Representation - Neurons and the brain</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-14T16:00:00.000Z" title="发表于 2022-07-15 00:00:00" time="2022-07-15 00:00:00">2022-07-15</time><time class="time_hidden" datetime="2025-08-05T05:31:52.571Z" title="更新于 2025-08-05 13:31:52" time="2025-08-05 13:31:52">2025-08-05</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Machine-Learning/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Machine Learning</span></a></span></div><div class="content">ML32 - Neural Networks: Representation - Neurons and the brain
-神经元与大脑
-
-Origins: Algorithms that try to mimic the brain.
-Was very widely used in 80s and early 90s; popularity diminished in late 90s.
-Recent resurgence: State-of-the-art technique for many applications
-
 </div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/ML/ML33/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">Machine Learning</div><a class="unvisited-post" href="/ML/ML33/" title="ML33 - Neural Networks： Representation - Model representation">未读</a></div><a class="article-title" href="/ML/ML33/" title="ML33 - Neural Networks： Representation - Model representation">ML33 - Neural Networks： Representation - Model representation</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-14T16:00:00.000Z" title="发表于 2022-07-15 00:00:00" time="2022-07-15 00:00:00">2022-07-15</time><time class="time_hidden" datetime="2025-08-05T05:31:51.584Z" title="更新于 2025-08-05 13:31:51" time="2025-08-05 13:31:51">2025-08-05</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Machine-Learning/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Machine Learning</span></a></span></div><div class="content">ML33 - Neural Networks: Representation - Model representation
 模型展示
 Neural Network
@@ -378,6 +371,15 @@ ai(i)a_i^{(i)}ai(i)​ = “activation” of unit i in layer j
 θ(j)\theta^{(j)}θ(j) = matrix of weights controlling function mapping from layer j to layer j + 1
 
 If network has sjs_jsj​ units in layer j, sj+1s_{j+1}sj+1​ units in layer j + 1, then θ(j)\theta^{(j)}θ(j) will be of dimension $ s_{j+1} \times (s_j + 1 ) $
+</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/ML/ML35/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">Machine Learning</div><a class="unvisited-post" href="/ML/ML35/" title="ML35 - Neural Networks： Representation - Multi-class classification">未读</a></div><a class="article-title" href="/ML/ML35/" title="ML35 - Neural Networks： Representation - Multi-class classification">ML35 - Neural Networks： Representation - Multi-class classification</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-14T16:00:00.000Z" title="发表于 2022-07-15 00:00:00" time="2022-07-15 00:00:00">2022-07-15</time><time class="time_hidden" datetime="2025-08-05T05:31:49.691Z" title="更新于 2025-08-05 13:31:49" time="2025-08-05 13:31:49">2025-08-05</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Machine-Learning/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Machine Learning</span></a></span></div><div class="content">ML35 - Neural Networks: Representation - Multi-class classification
+多元分类
+</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/ML/ML32/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">Machine Learning</div><a class="unvisited-post" href="/ML/ML32/" title="ML32 - Neural Networks： Representation - Neurons and the brain">未读</a></div><a class="article-title" href="/ML/ML32/" title="ML32 - Neural Networks： Representation - Neurons and the brain">ML32 - Neural Networks： Representation - Neurons and the brain</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-14T16:00:00.000Z" title="发表于 2022-07-15 00:00:00" time="2022-07-15 00:00:00">2022-07-15</time><time class="time_hidden" datetime="2025-08-05T05:31:52.571Z" title="更新于 2025-08-05 13:31:52" time="2025-08-05 13:31:52">2025-08-05</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Machine-Learning/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Machine Learning</span></a></span></div><div class="content">ML32 - Neural Networks: Representation - Neurons and the brain
+神经元与大脑
+
+Origins: Algorithms that try to mimic the brain.
+Was very widely used in 80s and early 90s; popularity diminished in late 90s.
+Recent resurgence: State-of-the-art technique for many applications
+
 </div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/ML/ML34/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">Machine Learning</div><a class="unvisited-post" href="/ML/ML34/" title="ML34 - Neural Networks： Representation - Examples amd intuitions">未读</a></div><a class="article-title" href="/ML/ML34/" title="ML34 - Neural Networks： Representation - Examples amd intuitions">ML34 - Neural Networks： Representation - Examples amd intuitions</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-14T16:00:00.000Z" title="发表于 2022-07-15 00:00:00" time="2022-07-15 00:00:00">2022-07-15</time><time class="time_hidden" datetime="2025-08-05T05:31:50.586Z" title="更新于 2025-08-05 13:31:50" time="2025-08-05 13:31:50">2025-08-05</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Machine-Learning/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Machine Learning</span></a></span></div><div class="content">ML34 - Neural Networks: Representation - Examples amd intuitions
 例子与直觉理解
 Non-linear classification example: XOR/XNOR
@@ -385,8 +387,6 @@ $ x_1, \ x_2 $ are binary(0 or 1)
 $ y = x_1 \ XOR \ x_2 $
 $\quad \quad x_1 \ XNOR \ x_2 $
 $\quad \quad NOT \ (x_1 \ XOR \ x_2) $
-</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/ML/ML35/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">Machine Learning</div><a class="unvisited-post" href="/ML/ML35/" title="ML35 - Neural Networks： Representation - Multi-class classification">未读</a></div><a class="article-title" href="/ML/ML35/" title="ML35 - Neural Networks： Representation - Multi-class classification">ML35 - Neural Networks： Representation - Multi-class classification</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-14T16:00:00.000Z" title="发表于 2022-07-15 00:00:00" time="2022-07-15 00:00:00">2022-07-15</time><time class="time_hidden" datetime="2025-08-05T05:31:49.691Z" title="更新于 2025-08-05 13:31:49" time="2025-08-05 13:31:49">2025-08-05</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Machine-Learning/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Machine Learning</span></a></span></div><div class="content">ML35 - Neural Networks: Representation - Multi-class classification
-多元分类
 </div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/ML/ML36/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">Machine Learning</div><a class="unvisited-post" href="/ML/ML36/" title="ML36 - Neural Networks： Learning - Cost Function">未读</a></div><a class="article-title" href="/ML/ML36/" title="ML36 - Neural Networks： Learning - Cost Function">ML36 - Neural Networks： Learning - Cost Function</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-14T16:00:00.000Z" title="发表于 2022-07-15 00:00:00" time="2022-07-15 00:00:00">2022-07-15</time><time class="time_hidden" datetime="2025-08-05T05:31:48.754Z" title="更新于 2025-08-05 13:31:48" time="2025-08-05 13:31:48">2025-08-05</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Machine-Learning/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Machine Learning</span></a></span></div><div class="content">ML36 - Neural Networks: Learning - Cost Function
 代价函数
 Neural Network(Classification):
@@ -401,7 +401,14 @@ Gradient computation:
 J(θ)=−1m[∑i=1m∑k=1Kyk(i)log(hθ(x(i)))k+(1−yk(i))log(1−(hθ(x(i)))k)]+λ2m∑l=1L−1∑i=1sl∑j=1sl+1(θji(l))2\mathtt{J}(\theta) = - \frac{1}{m} \begin{bmatrix} \displaystyle\sum_{i=1}^m\sum_{k=1}^K y_k^{(i)}log(h_\theta(x^{(i)}))_k + (1-y_k^{(i)})log(1-(h_\theta(x^{(i)}))_k) \end{bmatrix} + \frac{\lambda}{2m}\displaystyle\sum_{l=1}^{L-1}\sum_{i=1}^{s_l}\sum_{j=1}^{s_l+1} (\theta_{ji}^{(l)})^2
 J(θ)=−m1​[i=1∑m​k=1∑K​ ...</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/ML/ML38/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">Machine Learning</div><a class="unvisited-post" href="/ML/ML38/" title="ML38 - Neural Networks： Learning - Backpropagation intuition">未读</a></div><a class="article-title" href="/ML/ML38/" title="ML38 - Neural Networks： Learning - Backpropagation intuition">ML38 - Neural Networks： Learning - Backpropagation intuition</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-14T16:00:00.000Z" title="发表于 2022-07-15 00:00:00" time="2022-07-15 00:00:00">2022-07-15</time><time class="time_hidden" datetime="2025-08-05T05:31:46.995Z" title="更新于 2025-08-05 13:31:46" time="2025-08-05 13:31:46">2025-08-05</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Machine-Learning/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Machine Learning</span></a></span></div><div class="content">ML38 - Neural Networks: Learning - Backpropagation intuition
 理解反向传播
-</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/ML/ML39/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">Machine Learning</div><a class="unvisited-post" href="/ML/ML39/" title="ML39 - Neural Networks： Learning - Implementation note： Unrolling parameters">未读</a></div><a class="article-title" href="/ML/ML39/" title="ML39 - Neural Networks： Learning - Implementation note： Unrolling parameters">ML39 - Neural Networks： Learning - Implementation note： Unrolling parameters</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-14T16:00:00.000Z" title="发表于 2022-07-15 00:00:00" time="2022-07-15 00:00:00">2022-07-15</time><time class="time_hidden" datetime="2025-08-05T05:31:45.885Z" title="更新于 2025-08-05 13:31:45" time="2025-08-05 13:31:45">2025-08-05</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Machine-Learning/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Machine Learning</span></a></span></div><div class="content">ML39 - Neural Networks: Learning - Implementation note: Unrolling parameters
+</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/ML/ML40/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">Machine Learning</div><a class="unvisited-post" href="/ML/ML40/" title="ML40 - Neural Networks： Learning - Gradient checking">未读</a></div><a class="article-title" href="/ML/ML40/" title="ML40 - Neural Networks： Learning - Gradient checking">ML40 - Neural Networks： Learning - Gradient checking</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-14T16:00:00.000Z" title="发表于 2022-07-15 00:00:00" time="2022-07-15 00:00:00">2022-07-15</time><time class="time_hidden" datetime="2025-08-05T05:31:44.198Z" title="更新于 2025-08-05 13:31:44" time="2025-08-05 13:31:44">2025-08-05</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Machine-Learning/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Machine Learning</span></a></span></div><div class="content">ML40 - Neural Networks: Learning - Gradient checking
+梯度检测
+Numerical estimation of gradients
+Implement:
+1gradApprox = ( J (theta + EPSILON) - J (theta - EPSILON)) / (2 * EPSILON)
+**Parameter vector $\vartheta ∗∗**  
+∗∗ \quad \quad \theta \in \mathbb{R}^n $ E.G. $ \theta $ is “unroll” version of $ \Theta^{(1)}, \ \Theta^{(2)}, \ \Theta^{(3)} $
+1234567for i = 1 : n,    thetaPlus = theta;    thetaPlus(i) = thetaPlus(i) + EPSILON;    thetaMinus = theta;    thetaMinus(i) = thetaMinus(i) - EPSILON;     ...</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/ML/ML39/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">Machine Learning</div><a class="unvisited-post" href="/ML/ML39/" title="ML39 - Neural Networks： Learning - Implementation note： Unrolling parameters">未读</a></div><a class="article-title" href="/ML/ML39/" title="ML39 - Neural Networks： Learning - Implementation note： Unrolling parameters">ML39 - Neural Networks： Learning - Implementation note： Unrolling parameters</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-14T16:00:00.000Z" title="发表于 2022-07-15 00:00:00" time="2022-07-15 00:00:00">2022-07-15</time><time class="time_hidden" datetime="2025-08-05T05:31:45.885Z" title="更新于 2025-08-05 13:31:45" time="2025-08-05 13:31:45">2025-08-05</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Machine-Learning/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Machine Learning</span></a></span></div><div class="content">ML39 - Neural Networks: Learning - Implementation note: Unrolling parameters
 展开参数
 Advanced optimization
 123function [jVal, gradient] = costFunction(theta)···optTheta = fminunc(@costFunction, initialTheta, options)
@@ -411,14 +418,7 @@ $ \quad \quad \mathtt{D}^{(1)}, \ \mathtt{D}^{(2)}, \ \mathtt{D}^{(3)} $ - matri
 “Unroll” into vectors
 Example
 $ s_1 = 10, s_2 = 10, s_3 = 1 $
-$ \Th ...</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/ML/ML40/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">Machine Learning</div><a class="unvisited-post" href="/ML/ML40/" title="ML40 - Neural Networks： Learning - Gradient checking">未读</a></div><a class="article-title" href="/ML/ML40/" title="ML40 - Neural Networks： Learning - Gradient checking">ML40 - Neural Networks： Learning - Gradient checking</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-14T16:00:00.000Z" title="发表于 2022-07-15 00:00:00" time="2022-07-15 00:00:00">2022-07-15</time><time class="time_hidden" datetime="2025-08-05T05:31:44.198Z" title="更新于 2025-08-05 13:31:44" time="2025-08-05 13:31:44">2025-08-05</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Machine-Learning/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Machine Learning</span></a></span></div><div class="content">ML40 - Neural Networks: Learning - Gradient checking
-梯度检测
-Numerical estimation of gradients
-Implement:
-1gradApprox = ( J (theta + EPSILON) - J (theta - EPSILON)) / (2 * EPSILON)
-**Parameter vector $\vartheta ∗∗**  
-∗∗ \quad \quad \theta \in \mathbb{R}^n $ E.G. $ \theta $ is “unroll” version of $ \Theta^{(1)}, \ \Theta^{(2)}, \ \Theta^{(3)} $
-1234567for i = 1 : n,    thetaPlus = theta;    thetaPlus(i) = thetaPlus(i) + EPSILON;    thetaMinus = theta;    thetaMinus(i) = thetaMinus(i) - EPSILON;     ...</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/ML/ML42/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">Machine Learning</div><a class="unvisited-post" href="/ML/ML42/" title="ML42 - Neural Networks： Learning - Putting it togather">未读</a></div><a class="article-title" href="/ML/ML42/" title="ML42 - Neural Networks： Learning - Putting it togather">ML42 - Neural Networks： Learning - Putting it togather</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-14T16:00:00.000Z" title="发表于 2022-07-15 00:00:00" time="2022-07-15 00:00:00">2022-07-15</time><time class="time_hidden" datetime="2025-08-05T05:33:08.541Z" title="更新于 2025-08-05 13:33:08" time="2025-08-05 13:33:08">2025-08-05</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Machine-Learning/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Machine Learning</span></a></span></div><div class="content">ML42 - Neural Networks: Learning - Putting it togather
+$ \Th ...</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/ML/ML42/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">Machine Learning</div><a class="unvisited-post" href="/ML/ML42/" title="ML42 - Neural Networks： Learning - Putting it togather">未读</a></div><a class="article-title" href="/ML/ML42/" title="ML42 - Neural Networks： Learning - Putting it togather">ML42 - Neural Networks： Learning - Putting it togather</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-14T16:00:00.000Z" title="发表于 2022-07-15 00:00:00" time="2022-07-15 00:00:00">2022-07-15</time><time class="time_hidden" datetime="2025-08-05T05:33:08.541Z" title="更新于 2025-08-05 13:33:08" time="2025-08-05 13:33:08">2025-08-05</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Machine-Learning/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Machine Learning</span></a></span></div><div class="content">ML42 - Neural Networks: Learning - Putting it togather
 组合一块
 Training a neural network
 

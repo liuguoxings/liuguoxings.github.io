@@ -60,7 +60,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2025-08-08 10:37:15',
+  postUpdate: '2025-08-08 15:50:43',
   postMainColor: '',
 }</script><noscript><style type="text/css">
   #nav {
@@ -234,27 +234,15 @@ if (true) {
       </a>
     </div>
     
-    <div class="catalog-list-item" id="/categories/操作系统/">
-      <a href="/categories/操作系统/">
-        操作系统
-      </a>
-    </div>
-    
-    <div class="catalog-list-item" id="/categories/Go语言/">
-      <a href="/categories/Go语言/">
-        Go语言
-      </a>
-    </div>
-    
     <div class="catalog-list-item" id="/categories/SpringBoot-实战/">
       <a href="/categories/SpringBoot-实战/">
         SpringBoot 实战
       </a>
     </div>
     
-    <div class="catalog-list-item" id="/categories/Python语言/">
-      <a href="/categories/Python语言/">
-        Python语言
+    <div class="catalog-list-item" id="/categories/Go语言/">
+      <a href="/categories/Go语言/">
+        Go语言
       </a>
     </div>
     
@@ -270,9 +258,21 @@ if (true) {
       </a>
     </div>
     
+    <div class="catalog-list-item" id="/categories/操作系统/">
+      <a href="/categories/操作系统/">
+        操作系统
+      </a>
+    </div>
+    
     <div class="catalog-list-item" id="/categories/深度学习/">
       <a href="/categories/深度学习/">
         深度学习
+      </a>
+    </div>
+    
+    <div class="catalog-list-item" id="/categories/Python语言/">
+      <a href="/categories/Python语言/">
+        Python语言
       </a>
     </div>
     
@@ -292,15 +292,15 @@ if (true) {
 初始化
 12345678Status InitStack(SqStack &amp;s) &#123;    s.base = (SElemType *) malloc(MAXSIZE * sizeof(SElemType));    if (!s.base) return ERROR;    s.top = s.base;    s.stackSize = MAXSIZE;    s.length = 0;    return OK;&#125;
 判空
-123456Status ...</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/DS/CODE/LinkList/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">数据结构</div><a class="unvisited-post" href="/DS/CODE/LinkList/" title="链表实现（代码）">未读</a></div><a class="article-title" href="/DS/CODE/LinkList/" title="链表实现（代码）">链表实现（代码）</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2020-11-27T16:00:00.000Z" title="发表于 2020-11-28 00:00:00" time="2020-11-28 00:00:00">2020-11-28</time><time class="time_hidden" datetime="2025-08-08T01:57:21.748Z" title="更新于 2025-08-08 09:57:21" time="2025-08-08 09:57:21">2025-08-08</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>数据结构</span></a><a class="article-meta__tags" href="/tags/%E4%BB%A3%E7%A0%81/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>代码</span></a></span></div><div class="content">链表
+123456Status ...</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/DS/CODE/LinkList/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">数据结构</div><a class="unvisited-post" href="/DS/CODE/LinkList/" title="链表实现（代码）">未读</a></div><a class="article-title" href="/DS/CODE/LinkList/" title="链表实现（代码）">链表实现（代码）</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2020-11-27T16:00:00.000Z" title="发表于 2020-11-28 00:00:00" time="2020-11-28 00:00:00">2020-11-28</time><time class="time_hidden" datetime="2025-08-08T07:49:02.936Z" title="更新于 2025-08-08 15:49:02" time="2025-08-08 15:49:02">2025-08-08</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>数据结构</span></a><a class="article-meta__tags" href="/tags/%E4%BB%A3%E7%A0%81/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>代码</span></a></span></div><div class="content">链表
 结构体定义
-1234567891011#define MAXSIZE 100#define OK 1#define ERROR 0typedef ElemType int;typedef Status int;typedef struct LNode&#123;    ElemType data;    struct LNode *next;&#125;LNode, *LinkList;
+1234567891011#define MAXSIZE 100#define OK 1#define ERROR 0typedef int ElemType;typedef int Status;typedef struct LNode&#123;    ElemType data;    struct LNode *next;&#125;LNode, *LinkList;
 初始化
 12345Status Init_LinkList(LinkList &amp;L)&#123;    L = (LinkList) malloc (sizeof(LNode));    L-&gt;next = NULL;    return OK;&#125;
 头插法
-1234567891011Status HeadInsert_LinkList(LinkList &amp;L, int n)&#123;    LNode p;    for(int i = 0 ; i &lt; n ; i++)&#123;        p = (LNode *) malloc (sizeof(L ...</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/DS/CODE/SqList/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">数据结构</div><a class="unvisited-post" href="/DS/CODE/SqList/" title="顺序表实现（代码）">未读</a></div><a class="article-title" href="/DS/CODE/SqList/" title="顺序表实现（代码）">顺序表实现（代码）</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2020-11-27T16:00:00.000Z" title="发表于 2020-11-28 00:00:00" time="2020-11-28 00:00:00">2020-11-28</time><time class="time_hidden" datetime="2025-08-08T01:58:27.932Z" title="更新于 2025-08-08 09:58:27" time="2025-08-08 09:58:27">2025-08-08</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>数据结构</span></a><a class="article-meta__tags" href="/tags/%E4%BB%A3%E7%A0%81/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>代码</span></a></span></div><div class="content">顺序表
+1234567891011Status HeadInsert_LinkList(LinkList &amp;L, int n)&#123;    LNode p;    for(int i = 0 ; i &lt; n ; i++)&#123;        p = (LNode *) malloc (sizeof(L ...</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/DS/CODE/SqList/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">数据结构</div><a class="unvisited-post" href="/DS/CODE/SqList/" title="顺序表实现（代码）">未读</a></div><a class="article-title" href="/DS/CODE/SqList/" title="顺序表实现（代码）">顺序表实现（代码）</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2020-11-27T16:00:00.000Z" title="发表于 2020-11-28 00:00:00" time="2020-11-28 00:00:00">2020-11-28</time><time class="time_hidden" datetime="2025-08-08T07:50:17.580Z" title="更新于 2025-08-08 15:50:17" time="2025-08-08 15:50:17">2025-08-08</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>数据结构</span></a><a class="article-meta__tags" href="/tags/%E4%BB%A3%E7%A0%81/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>代码</span></a></span></div><div class="content">顺序表
 结构体定义
-123456789101112#define MAXSIZE 100#define OK 1#define ERROR 0typedef ElemType int;typedef Status int;typedef struct &#123;    ElemType *elem;    int Length;    int ListSize;&#125;SqList;
+123456789101112#define MAXSIZE 100#define OK 1#define ERROR 0typedef int ElemType;typedef int Status;typedef struct &#123;    ElemType *elem;    int Length;    int ListSize;&#125;SqList;
 初始化
 1234567Status Init_SqList(SqList &amp;L)&#123;    L.elem = (ElemType *) malloc (MAXSIZE * sizeof (ElemType));    if(!L.elem) return ERROR;    L.Length = 0;    L.ListSize = MAXSIZE;    return OK;&#125;
 插入
